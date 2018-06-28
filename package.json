@@ -1,0 +1,45 @@
+{
+  "name": "blog-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react-loadable":"5.4.0",
+    "antd":"^3.6.4",
+    "react":"^16.4.0",
+    "react-dom":"^16.4.0",
+    "react-redux":"^5.0.7",
+    "react-router-dom":"^4.2.2",
+    "react-scripts-ts": "2.15.1",
+    "redux": "^4.0.0",
+    "redux-saga": "^1.0.0-beta.1",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start --scripts-version react-scripts-ts",
+    "build": "react-app-rewired build --scripts-version react-scripts-ts",
+    "test":
+      "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "@types/react-loadable":"5.4.0",
+    "@types/react-redux": "^6.0.0",
+    "@types/enzyme": "^3.1.10",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^22.2.3",
+    "@types/node": "^10.0.6",
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-router-dom": "^4.2.6",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "jest-config": "^22.4.3",
+    "prettier": "^1.13.4",
+    "react-app-rewired": "^1.5.2",
+    "ts-import-plugin": "^1.4.4",
+    "react-app-rewire-less":"^2.1.1",
+    "typescript": "^2.9.1"
+  }
+}
