@@ -1,55 +1,131 @@
-import { Col, Layout, Row } from 'antd'
+import { Icon, Layout, Menu } from 'antd'
 import * as React from 'react'
+const { Header, Sider, Content } = Layout
 import { ReactHTML } from 'react'
-import Header from '../Layout/Header/Header'
-import Sidebar, { IInfo } from '../Layout/Sidebar/Sidebar'
 import './style.less'
-
-const { Footer, Content } = Layout
+const SubMenu = Menu.SubMenu
+const MenuItem = Menu.Item
 interface ILocation {
   pathname: string
 }
 interface IProps {
-  info: IInfo
-  articleTitle: string[]
   children: ReactHTML
   location: ILocation
 }
 class App extends React.Component<IProps> {
+  public menuList = [
+    { label: '首页', url: '/', icon: 'home', key: 1 },
+    {
+      children: [
+        { label: '文章管理', url: '', icon: 'form', key: 2 },
+        { label: '添加文章', url: '', icon: 'upload', key: 3 }
+      ],
+      icon: 'book',
+      key: 7,
+      label: '文章'
+    },
+    {
+      children: [
+        { label: '说说管理', url: '', icon: 'form', key: 5 },
+        { label: '发表说说', url: '', icon: 'upload', key: 6 }
+      ],
+      icon: 'message',
+      key: 8,
+      label: '说说'
+    },
+    {
+      icon: 'exception',
+      key: 9,
+      label: '简历'
+    },
+    {
+      icon: 'user',
+      key: 10,
+      label: '用户'
+    }
+  ]
+  public state = {
+    collapsed: false
+  }
+  public toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed
+    })
+  }
+  public renderMenu = (menuList: any[]): any => {
+    return menuList.map(item => {
+      if (item.children) {
+        return (
+          <SubMenu
+            key={item.key}
+            title={
+              <span>
+                <Icon type={item.icon} className="big-icon-font" />
+                <span>{item.label}</span>
+              </span>
+            }>
+            {this.renderMenu(item.children)}
+          </SubMenu>
+        )
+      } else {
+        return (
+          <MenuItem key={item.key}>
+            <Icon type={item.icon} className="big-icon-font" />
+            <span>{item.label}</span>
+          </MenuItem>
+        )
+      }
+    })
+  }
   public render() {
-    const { info, articleTitle, children, location } = this.props
-    const isResume = location.pathname === '/resume'
-    return !isResume ? (
-      <Layout>
-        <Header />
-
+    const { children, location } = this.props
+    const { collapsed } = this.state
+    const isLogin = location.pathname === '/login'
+    return !isLogin ? (
+      <Layout
+        className="menu"
+        style={{
+          minHeight: '100vh',
+          overflow: 'auto'
+        }}>
+        <Sider
+          style={{
+            minHeight: '100vh'
+          }}
+          trigger={null}
+          collapsed={collapsed}
+          collapsible={true}>
+          <div className="logo">
+            <img
+              alt="logo"
+              src="http://antd-admin.zuiidea.com/public/logo.svg"
+            />
+            {!collapsed && <span>Blog ADMIN</span>}
+          </div>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            {this.renderMenu(this.menuList)}
+          </Menu>
+        </Sider>
         <Layout>
-          <Content>
-            <Row>
-              <Col xs={1} sm={1} md={1} lg={1} xl={3} xxl={5} />
-              <Col xs={22} sm={22} md={22} lg={20} xl={18} xxl={14}>
-                <Row>
-                  <Col xs={24} sm={24} md={24} lg={17} xl={17} xxl={17}>
-                    {children}
-                  </Col>
-                  <Col
-                    xs={24}
-                    sm={24}
-                    md={24}
-                    lg={{ span: 6, offset: 1 }}
-                    xl={{ span: 6, offset: 1 }}
-                    xxl={{ span: 6, offset: 1 }}>
-                    <Sidebar info={info} articleTitle={articleTitle} />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Icon
+              className="trigger"
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.toggle}
+            />
+          </Header>
+          <Content
+            style={{
+              background: '#fff',
+              margin: '24px 16px',
+              padding: 24
+            }}>
+            {children}
           </Content>
         </Layout>
-        <Footer>Footer</Footer>
       </Layout>
     ) : (
-      <div>{children}</div>
+      { children }
     )
   }
 }

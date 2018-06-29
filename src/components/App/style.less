@@ -1,11 +1,34 @@
- .tag {
-    margin-bottom: 5px;
+.menu{
+  .logo {
+    text-align: center;
+    cursor: pointer;
+    margin:  24px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 40px;
+      margin-right: 8px;
+    }
+    span {
+      vertical-align: text-bottom;
+      font-size: 16px;
+      text-transform: uppercase;
+      display: inline-block;
+      font-weight: 700;
+      color: #1890ff;
+    }
   }
- .card{
-   margin-bottom: 20px;
- }
-.card-title{
-  font-size: 25px;
-  font-weight: 600;
-  text-align: center;
+  .trigger:hover {
+    color: #1890ff;
+    background-color: rgba(24,144,255,.15);
+  }
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: all .3s;
+  }
 }
