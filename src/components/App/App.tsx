@@ -1,10 +1,10 @@
-import { Icon, Layout, Menu } from 'antd'
+import { Layout } from 'antd'
 import * as React from 'react'
-const { Header, Sider, Content } = Layout
 import { ReactHTML } from 'react'
+import BlogHeader from './Header'
+import Menu from './Menu'
 import './style.less'
-const SubMenu = Menu.SubMenu
-const MenuItem = Menu.Item
+const { Sider, Content } = Layout
 interface ILocation {
   pathname: string
 }
@@ -13,68 +13,12 @@ interface IProps {
   location: ILocation
 }
 class App extends React.Component<IProps> {
-  public menuList = [
-    { label: '首页', url: '/', icon: 'home', key: 1 },
-    {
-      children: [
-        { label: '文章管理', url: '', icon: 'form', key: 2 },
-        { label: '添加文章', url: '', icon: 'upload', key: 3 }
-      ],
-      icon: 'book',
-      key: 7,
-      label: '文章'
-    },
-    {
-      children: [
-        { label: '说说管理', url: '', icon: 'form', key: 5 },
-        { label: '发表说说', url: '', icon: 'upload', key: 6 }
-      ],
-      icon: 'message',
-      key: 8,
-      label: '说说'
-    },
-    {
-      icon: 'exception',
-      key: 9,
-      label: '简历'
-    },
-    {
-      icon: 'user',
-      key: 10,
-      label: '用户'
-    }
-  ]
   public state = {
     collapsed: false
   }
   public toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
-    })
-  }
-  public renderMenu = (menuList: any[]): any => {
-    return menuList.map(item => {
-      if (item.children) {
-        return (
-          <SubMenu
-            key={item.key}
-            title={
-              <span>
-                <Icon type={item.icon} className="big-icon-font" />
-                <span>{item.label}</span>
-              </span>
-            }>
-            {this.renderMenu(item.children)}
-          </SubMenu>
-        )
-      } else {
-        return (
-          <MenuItem key={item.key}>
-            <Icon type={item.icon} className="big-icon-font" />
-            <span>{item.label}</span>
-          </MenuItem>
-        )
-      }
     })
   }
   public render() {
@@ -89,9 +33,7 @@ class App extends React.Component<IProps> {
           overflow: 'auto'
         }}>
         <Sider
-          style={{
-            minHeight: '100vh'
-          }}
+          style={{ minHeight: '100vh' }}
           trigger={null}
           collapsed={collapsed}
           collapsible={true}>
@@ -102,18 +44,10 @@ class App extends React.Component<IProps> {
             />
             {!collapsed && <span>Blog ADMIN</span>}
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            {this.renderMenu(this.menuList)}
-          </Menu>
+          <Menu />
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
-              className="trigger"
-              type={collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
-          </Header>
+          <BlogHeader collapsed={collapsed} toggle={this.toggle} />
           <Content
             style={{
               background: '#fff',
