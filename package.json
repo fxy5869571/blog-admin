@@ -5,7 +5,7 @@
   "dependencies": {
     "react-loadable":"5.4.0",
     "antd":"^3.6.4",
-    "react":"^16.4.0",
+    "react":"^16.4.1",
     "react-dom":"^16.4.0",
     "react-redux":"^5.0.7",
     "react-router-dom":"^4.2.2",
@@ -40,6 +40,6 @@
     "react-app-rewired": "^1.5.2",
     "ts-import-plugin": "^1.4.4",
     "react-app-rewire-less":"^2.1.1",
-    "typescript": "^2.9.1"
+    "typescript":"2.9.2"
   }
 }

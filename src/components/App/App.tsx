@@ -1,8 +1,8 @@
 import { Layout } from 'antd'
 import * as React from 'react'
 import { ReactHTML } from 'react'
-import BlogHeader from './Header'
-import Menu from './Menu'
+import Header from '../Layout/Header/Header'
+import Menu from '../Layout/Menu/Menu'
 import './style.less'
 const { Sider, Content } = Layout
 interface ILocation {
@@ -47,7 +47,7 @@ class App extends React.Component<IProps> {
           <Menu />
         </Sider>
         <Layout>
-          <BlogHeader collapsed={collapsed} toggle={this.toggle} />
+          <Header collapsed={collapsed} toggle={this.toggle} />
           <Content
             style={{
               background: '#fff',
