@@ -12,7 +12,7 @@ const RouterList: any[] = [
   },
   {
     component: () => import('../containers/Resume'),
-    path: '/resume'
+    path: '/resumes'
   },
   {
     component: () => import('../components/Login/Login'),
