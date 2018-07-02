@@ -10,15 +10,24 @@ export interface IMenuItem {
   icon: string
   key: string
 }
+interface IState {
+  key: string
+  openKeys: string
+  pathname: string
+}
 interface IProps {
   menuList: IMenuItem[]
   pathname: string
   handleTag: (item: IMenuItem) => void
+  theme: boolean
 }
 class BlogMenu extends React.Component<IProps> {
-  // 保持菜单选中
-  public static getDerivedStateFromProps(nextProps: IProps) {
+  // 匹配当前路由，保持菜单选中
+  public static getDerivedStateFromProps(nextProps: IProps, state: IState) {
     const { pathname, menuList } = nextProps
+    if (state.pathname === pathname) {
+      return null
+    }
     let nextState = {}
     menuList.forEach(items => {
       if (Array.isArray(items.children)) {
@@ -36,13 +45,14 @@ class BlogMenu extends React.Component<IProps> {
         }
       }
     })
+    nextState = { ...nextState, pathname }
     return nextState
   }
   public state = {
     key: '1',
-    openKeys: ''
+    openKeys: '',
+    pathname: '/'
   }
-
   public onMenuItem = (item: IMenuItem) => {
     this.props.handleTag(item)
     this.setState({ key: item.key })
@@ -85,7 +95,7 @@ class BlogMenu extends React.Component<IProps> {
     const { openKeys, key } = this.state
     return (
       <Menu
-        theme="dark"
+        theme={this.props.theme ? 'dark' : 'light'}
         mode="inline"
         onOpenChange={this.onOpenChange}
         selectedKeys={[key]}

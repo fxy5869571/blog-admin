@@ -1,43 +1,27 @@
-import { AutoComplete, Icon, Input, Layout } from 'antd'
+import { Icon, Layout, Popover } from 'antd'
 import * as React from 'react'
-import { isNavBar } from '../../../common'
 import './style.less'
 const { Header } = Layout
 interface IProps {
   collapsed: boolean
+  isMobile: boolean
   toggle: () => void
 }
 class BlogHeader extends React.Component<IProps> {
-  public state = { options: [], valueTitle: '' }
-  public onAutoCompleteSelect = () => {
-    console.log(11)
-  }
-  public handleSearch = () => {
-    console.log(11)
-  }
   public render() {
-    const { collapsed, toggle } = this.props
-    const { options, valueTitle } = this.state
+    const { collapsed, toggle, children, isMobile } = this.props
     return (
       <Header className="header">
-        <Icon
-          className="trigger"
-          type={collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={toggle}
-        />
-        {!isNavBar && (
-          <div>
-            <AutoComplete
-              dataSource={options}
-              optionLabelProp="value"
-              style={{ width: 300 }}
-              value={valueTitle}
-              onSelect={this.onAutoCompleteSelect}
-              onSearch={this.handleSearch}
-              placeholder="全局搜索菜单，功能超棒">
-              <Input suffix={<Icon type="search" />} />
-            </AutoComplete>
-          </div>
+        {isMobile ? (
+          <Popover content={children} placement="bottomRight" trigger="click">
+            <Icon className="trigger" type="bars" onClick={toggle} />
+          </Popover>
+        ) : (
+          <Icon
+            className="trigger"
+            type={collapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={toggle}
+          />
         )}
         <Icon
           type="user"

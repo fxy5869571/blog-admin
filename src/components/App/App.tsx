@@ -1,4 +1,4 @@
-import { Layout } from 'antd'
+import { Icon, Layout, Switch } from 'antd'
 import * as React from 'react'
 import { ReactHTML } from 'react'
 import Header from '../Layout/Header/Header'
@@ -6,15 +6,20 @@ import Menu, { IMenuItem } from '../Layout/Menu/Menu'
 import Tags from '../Layout/Tags/Tags'
 import './style.less'
 const { Sider, Content } = Layout
+interface IHistory {
+  push: (pathname: string) => void
+}
 interface ILocation {
   pathname: string
 }
 interface IProps {
   children: ReactHTML
   location: ILocation
+  history: IHistory
 }
 
 class App extends React.Component<IProps> {
+  public timer: any
   public menuList = [
     { label: '首页', url: '/', icon: 'home', key: '1' },
     {
@@ -50,67 +55,115 @@ class App extends React.Component<IProps> {
   ]
   public state = {
     collapsed: false,
-    tagList: [{ label: '首页', url: '/', icon: 'home', key: '1' }]
+    isMobile: false,
+    tagList: [{ label: '首页', url: '/', icon: 'home', key: '1' }],
+    theme: true
   }
   public componentDidMount() {
+    this.onResize()
     this.setState({
       tagList: JSON.parse(localStorage.getItem('tagList') || '[]')
     })
   }
+  public onClose = (tag: IMenuItem) => {
+    this.setState(
+      { tagList: this.state.tagList.filter(item => item.key !== tag.key) },
+      () => {
+        const { url } = this.state.tagList[this.state.tagList.length - 1]
+        this.props.history.push(url)
+        this.setLocalStorage()
+      }
+    )
+  }
+  public onResize = () => {
+    clearTimeout(this.timer)
+    this.timer = setTimeout(() => {
+      window.onresize = () => {
+        this.setState({
+          isMobile: document.body.clientWidth < 769
+        })
+      }
+    }, 500)
+  }
   public toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    })
+    this.setState({ collapsed: !this.state.collapsed })
+  }
+  public setLocalStorage = () => {
+    localStorage.setItem('tagList', JSON.stringify(this.state.tagList))
   }
   public handleTag = (item: IMenuItem) => {
     const tagKeys = new Set(this.state.tagList.map(tag => tag.key))
     if (tagKeys.has(item.key)) {
-      this.setState(
-        {
-          tagList: [...this.state.tagList]
-        },
-        () => {
-          localStorage.setItem('tagList', JSON.stringify(this.state.tagList))
-        }
-      )
+      this.setState({ tagList: [...this.state.tagList] }, this.setLocalStorage)
     } else {
       this.setState(
-        {
-          tagList: [...this.state.tagList, item]
-        },
-        () => {
-          localStorage.setItem('tagList', JSON.stringify(this.state.tagList))
-        }
+        { tagList: [...this.state.tagList, item] },
+        this.setLocalStorage
       )
     }
   }
+  public switchOnChange = () => {
+    this.setState({ theme: !this.state.theme })
+  }
   public render() {
     const { children, location } = this.props
-    const { collapsed, tagList } = this.state
+    const { collapsed, tagList, isMobile, theme } = this.state
     const isLogin = location.pathname === '/login'
     return !isLogin ? (
       <Layout className="menu" style={{ minHeight: '100vh' }}>
-        <Sider
-          style={{ minHeight: '100vh' }}
-          trigger={null}
-          collapsed={collapsed}
-          collapsible={true}>
-          <div className="logo">
-            <img
-              alt="logo"
-              src="http://antd-admin.zuiidea.com/public/logo.svg"
+        {!isMobile && (
+          <Sider
+            theme={theme ? 'dark' : 'light'}
+            style={{ minHeight: '100vh' }}
+            trigger={null}
+            collapsed={collapsed}
+            collapsible={true}>
+            <div className="logo">
+              <img
+                alt="logo"
+                src="http://antd-admin.zuiidea.com/public/logo.svg"
+              />
+              {!collapsed && <span>Blog ADMIN</span>}
+            </div>
+            <Menu
+              menuList={this.menuList}
+              pathname={location.pathname}
+              handleTag={this.handleTag}
+              theme={theme}
             />
-            {!collapsed && <span>Blog ADMIN</span>}
-          </div>
-          <Menu
-            menuList={this.menuList}
-            pathname={location.pathname}
-            handleTag={this.handleTag}
-          />
-        </Sider>
+            <div className={theme ? 'switch-theme dark' : 'switch-theme light'}>
+              <span>
+                <Icon type="bulb" />
+                <span className="title">切换主题</span>
+              </span>
+              <Switch
+                checkedChildren="dark"
+                unCheckedChildren="light"
+                defaultChecked={true}
+                onChange={this.switchOnChange}
+              />
+            </div>
+          </Sider>
+        )}
         <Layout>
-          <Header collapsed={collapsed} toggle={this.toggle} />
-          <Tags tagList={tagList} pathname={location.pathname} />
+          <Header
+            collapsed={collapsed}
+            toggle={this.toggle}
+            isMobile={isMobile}>
+            {isMobile && (
+              <Menu
+                menuList={this.menuList}
+                pathname={location.pathname}
+                handleTag={this.handleTag}
+                theme={theme}
+              />
+            )}
+          </Header>
+          <Tags
+            tagList={tagList}
+            pathname={location.pathname}
+            onClose={this.onClose}
+          />
           <Content
             style={{
               background: '#fff',

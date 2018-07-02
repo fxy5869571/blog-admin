@@ -6,10 +6,11 @@ import './style.less'
 interface IProps {
   tagList: IMenuItem[]
   pathname: string
+  onClose: (item: IMenuItem) => void
 }
 class Tags extends React.Component<IProps> {
   public render() {
-    const { tagList, pathname } = this.props
+    const { tagList, pathname, onClose } = this.props
     return (
       <div className="tags">
         {tagList.map(
@@ -25,6 +26,7 @@ class Tags extends React.Component<IProps> {
               <Link to={item.url || ''} key={item.key}>
                 <Tag
                   color={item.url === pathname ? '#1890ff' : 'blue'}
+                  onClose={() => onClose(item)}
                   closable={true}>
                   <Icon type={item.icon} className="icon-font right" />
                   {item.label}
