@@ -1,6 +1,7 @@
 import 'whatwg-fetch'
+import { IPayload } from '../actions/articles'
 import { blogFetch } from '../common'
-import { IPayload } from '../types'
+
 export const fetchArticles = (payLoad: IPayload) =>
   blogFetch('/articles', payLoad)
 

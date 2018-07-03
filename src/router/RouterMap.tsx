@@ -4,11 +4,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import App from '../containers/App'
 import '../index.less'
 import loading from './loading'
-
 const RouterList: any[] = [
   {
-    component: () => import('../containers/Article'),
-    path: '/article/:Id'
+    component: () => import('../containers/Articles'),
+    path: '/edit-article'
+  },
+  {
+    component: () => import('../containers/AddArticle'),
+    path: '/add-article'
   },
   {
     component: () => import('../containers/Resume'),
@@ -18,10 +21,6 @@ const RouterList: any[] = [
     component: () => import('../components/Login/Login'),
     path: '/login'
   },
-  {
-    component: () => import('../containers/TimeFile'),
-    path: '/time-file'
-  }
 ]
 const RouterMap = () => (
   <Router>
@@ -32,7 +31,7 @@ const RouterMap = () => (
           exact={true}
           path="/"
           component={Loadable({
-            loader: () => import('../containers/Articles'),
+            loader: () => import('../containers/Article'),
             loading
           })}
         />

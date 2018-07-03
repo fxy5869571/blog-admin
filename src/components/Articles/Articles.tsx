@@ -1,34 +1,33 @@
-import { Card, Pagination } from 'antd'
+import { Button, message, Modal, Table, Tag } from 'antd'
+import { ColumnProps } from 'antd/lib/table'
 import * as React from 'react'
-import { format } from '../../common'
-import { IPayload } from '../../types'
-
+import { IPayload } from '../../actions/articles'
 import './style.less'
+const confirm = Modal.confirm
 interface IArticle {
   _id: string
   content: string
   title: string
+  tag: string[]
   create_at: string
-  updated_at: string
   access: string
+  abstract: string
   type: string
 }
 interface IHistory {
   push: (pathname: string) => void
 }
-interface IArticles {
+interface IProps {
   articles: IArticle[]
   history: IHistory
   total: number
   fetchArticle: (payload: IPayload) => void
+  deleteArticle: (id: string) => void
 }
-class Articles extends React.Component<IArticles> {
+class Articles extends React.Component<IProps> {
   public state = {
     pageIndex: 1,
-    pageSize: 5
-  }
-  public goArticle = (id: string) => {
-    this.props.history.push(`/article/${id}`)
+    pageSize: 10
   }
   public onChange = (page: number, pageSize: number) => {
     this.setState(
@@ -41,52 +40,112 @@ class Articles extends React.Component<IArticles> {
       }
     )
   }
+  public onShowSizeChange = (current: number, pageSize: number) => {
+    this.setState(
+      {
+        pageIndex: current,
+        pageSize
+      },
+      () => {
+        this.props.fetchArticle(this.state)
+      }
+    )
+  }
   public componentDidMount() {
     this.props.fetchArticle(this.state)
   }
+  public deleteArticle = (id: string) => {
+    confirm({
+      cancelText: '取消',
+      okText: '确定',
+      onOk: () => {
+        this.props.deleteArticle(id)
+      },
+      title: '确定删除这篇文章吗？',
+      onCancel() {
+        message.warning('取消删除')
+      }
+    })
+  }
   public render() {
-    const { articles = [], total, history } = this.props
-    const { pageIndex, pageSize } = this.state
+    const { state, props } = this
+    const { pageIndex, pageSize } = state
+    const { articles, total } = props
+    const columns: Array<ColumnProps<IArticle>> = [
+      {
+        key: 'title',
+        render: text => <h4>{text.title}</h4>,
+        title: '文章标题'
+      },
+      {
+        dataIndex: 'abstract',
+        key: 'abstract',
+        title: '文章简介'
+      },
+      {
+        key: 'create_at',
+        render: text => (
+          <span>{new Date(text.create_at).toLocaleString()}</span>
+        ),
+        title: '发表时间'
+      },
+      {
+        align: 'center',
+        dataIndex: 'access',
+        key: 'access',
+        title: '浏览数量'
+      },
+      {
+        key: 'tag',
+        render: text => (
+          <span>
+            {text.tag.map((item: string) => <Tag key={item}>{item}</Tag>)}
+          </span>
+        ),
+        title: '标签'
+      },
+      {
+        dataIndex: 'type',
+        key: 'type',
+        title: '分类'
+      },
+      {
+        key: 'action',
+        render: article => (
+          <span>
+            <Button
+              icon="edit"
+              type="primary"
+              size="small"
+              style={{ marginRight: 10 }}>
+              编辑
+            </Button>
+            <Button
+              icon="delete"
+              type="danger"
+              size="small"
+              onClick={() => this.deleteArticle(article._id)}>
+              删除
+            </Button>
+          </span>
+        ),
+        title: '操作'
+      }
+    ]
     return (
-      <>
-        {articles.map(item => (
-          <Card
-            key={item._id}
-            bordered={false}
-            hoverable={true}
-            className="article"
-            actions={[
-              <span key={item.create_at}>
-                创建于：{format(item.create_at)}
-              </span>,
-              <span key={item.updated_at}>
-                修改时间：{format(item.updated_at)}
-              </span>
-            ]}>
-            <div onClick={() => history.push(`/article/${item._id}`)}>
-              <h2>{item.title}</h2>
-              <p>
-                <span key={item.access} style={{ marginRight: 20 }}>
-                  浏览：{item.access}
-                </span>
-                <span key={item.type}>分类于：{item.type}</span>
-              </p>
-              <p
-                className="content"
-                dangerouslySetInnerHTML={{ __html: item.content + '...' }}
-              />
-            </div>
-          </Card>
-        ))}
-        <div className="Pagination">
-          <Pagination
-            current={pageIndex}
-            pageSize={pageSize}
-            total={total}
-            onChange={this.onChange}
-          />
-        </div>
-      </>
+      <Table
+        columns={columns}
+        dataSource={articles}
+        rowKey="_id"
+        pagination={{
+          current: pageIndex,
+          onChange: this.onChange,
+          onShowSizeChange: this.onShowSizeChange,
+          pageSize,
+          showSizeChanger: true,
+          total
+        }}
+      />
     )
   }
 }

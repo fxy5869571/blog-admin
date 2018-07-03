@@ -1,7 +1,6 @@
 import { connect, Dispatch } from 'react-redux'
+import { DELETE_ARTICLE, IPayload, REQUEST_ARTICLES } from '../actions/articles'
 import Articles from '../components/Articles/Articles'
-import { REQUEST_ARTICLES } from '../constants'
-import { IPayload } from '../types'
 
 interface IState {
   articles: IArticles
@@ -16,6 +15,12 @@ const mapStateToProps = (state: IState): object => ({
 })
 
 export const mapDispatchToProps = (dispatch: Dispatch) => ({
+  deleteArticle: (id: string) => {
+    dispatch({
+      id,
+      type: DELETE_ARTICLE
+    })
+  },
   fetchArticle: (payload: IPayload) => {
     dispatch({
       payload,
