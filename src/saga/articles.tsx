@@ -1,19 +1,25 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 import {
+  ADD_ARTICLE,
   ArticlesAction,
   DELETE_ARTICLE,
+  IAddArticles,
   IDeleteArticles,
   IPayload,
   RECEIVE_ARTICLES,
   REQUEST_ARTICLES
 } from '../actions/articles'
 
-import { fetchArticles } from '../services'
+import { addArticle, fetchArticles } from '../services'
 interface IState {
   articles: IArticles
 }
 interface IArticles {
   payload: IPayload
+}
+function* yieldAddArticle(action: IAddArticles) {
+  const response = yield call(addArticle, action.payload)
+  console.log(response)
 }
 function* yieldArticles(action: ArticlesAction) {
   const { payload } = action
@@ -27,6 +33,7 @@ function* deleteArticle(action: IDeleteArticles) {
   yield put({ type: REQUEST_ARTICLES, payload })
 }
 export function* watchYieldArticles() {
+  yield takeEvery(ADD_ARTICLE, yieldAddArticle)
   yield takeEvery(REQUEST_ARTICLES, yieldArticles)
   yield takeEvery(DELETE_ARTICLE, deleteArticle)
 }

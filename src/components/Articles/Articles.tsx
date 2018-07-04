@@ -2,6 +2,7 @@ import { Button, message, Modal, Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import * as React from 'react'
 import { IPayload } from '../../actions/articles'
+import SearchForm from './SearchForm'
 import './style.less'
 const confirm = Modal.confirm
 interface IArticle {
@@ -47,7 +48,10 @@ class Articles extends React.Component<IProps> {
         pageSize
       },
       () => {
-        this.props.fetchArticle(this.state)
+        this.props.fetchArticle({
+          pageIndex: current,
+          pageSize
+        })
       }
     )
   }
@@ -83,6 +87,16 @@ class Articles extends React.Component<IProps> {
         title: '文章简介'
       },
       {
+        key: 'tag',
+        render: text => <Tag key={text.tag}>{text.tag}</Tag>,
+        title: '标签'
+      },
+      {
+        dataIndex: 'type',
+        key: 'type',
+        title: '分类'
+      },
+      {
         key: 'create_at',
         render: text => (
           <span>{new Date(text.create_at).toLocaleString()}</span>
@@ -94,20 +108,6 @@ class Articles extends React.Component<IProps> {
         dataIndex: 'access',
         key: 'access',
         title: '浏览数量'
-      },
-      {
-        key: 'tag',
-        render: text => (
-          <span>
-            {text.tag.map((item: string) => <Tag key={item}>{item}</Tag>)}
-          </span>
-        ),
-        title: '标签'
-      },
-      {
-        dataIndex: 'type',
-        key: 'type',
-        title: '分类'
       },
       {
         key: 'action',
@@ -133,19 +133,25 @@ class Articles extends React.Component<IProps> {
       }
     ]
     return (
-      <Table
-        columns={columns}
-        dataSource={articles}
-        rowKey="_id"
-        pagination={{
-          current: pageIndex,
-          onChange: this.onChange,
-          onShowSizeChange: this.onShowSizeChange,
-          pageSize,
-          showSizeChanger: true,
-          total
-        }}
-      />
+      <>
+        <div className="search-form">
+          <SearchForm />
+        </div>
+        <Table
+          columns={columns}
+          bordered={true}
+          dataSource={articles}
+          rowKey="_id"
+          pagination={{
+            current: pageIndex,
+            onChange: this.onChange,
+            onShowSizeChange: this.onShowSizeChange,
+            pageSize,
+            showSizeChanger: true,
+            total
+          }}
+        />
+      </>
     )
   }
 }

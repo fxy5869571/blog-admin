@@ -16,6 +16,20 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@types/braft-editor@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.npmjs.org/@types/braft-editor/-/braft-editor-1.9.0.tgz#41ac9db74f7696dd78838bce5775d5c6c3d33f06"
+  dependencies:
+    "@types/draft-js" "*"
+    "@types/react" "*"
+
+"@types/draft-js@*":
+  version "0.10.23"
+  resolved "https://registry.npmjs.org/@types/draft-js/-/draft-js-0.10.23.tgz#c313e5e2d6d1b707c18317882b9415975890f3bd"
+  dependencies:
+    "@types/react" "*"
+    immutable "^3.8.1"
+
 "@types/history@*":
   version "4.6.2"
   resolved "http://registry.npm.taobao.org/@types/history/download/@types/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
@@ -1251,6 +1265,14 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+braft-editor@^1.9.7:
+  version "1.9.7"
+  resolved "https://registry.npmjs.org/braft-editor/-/braft-editor-1.9.7.tgz#127af88f0e2bf26786a783bf0d35b707460e49c9"
+  dependencies:
+    draft-convert "^2.0.0"
+    draft-js "^0.10.3"
+    draftjs-utils "^0.8.7"
+
 brorand@^1.0.1:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/brorand/download/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
@@ -2339,13 +2361,24 @@ dotenv@4.0.0, dotenv@^4.0.0:
   version "4.0.0"
   resolved "http://registry.npm.taobao.org/dotenv/download/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
 
-draft-js@^0.10.0, draft-js@~0.10.0:
+draft-convert@^2.0.0:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/draft-convert/-/draft-convert-2.1.2.tgz#00624b40fc80dca320c4e693a5fd21debb78206d"
+  dependencies:
+    immutable "~3.7.4"
+    invariant "^2.2.1"
+
+draft-js@^0.10.0, draft-js@^0.10.3, draft-js@~0.10.0:
   version "0.10.5"
   resolved "http://registry.npm.taobao.org/draft-js/download/draft-js-0.10.5.tgz#bfa9beb018fe0533dbb08d6675c371a6b08fa742"
   dependencies:
     fbjs "^0.8.15"
     immutable "~3.7.4"
     object-assign "^4.1.0"
+
+draftjs-utils@^0.8.7:
+  version "0.8.8"
+  resolved "https://registry.npmjs.org/draftjs-utils/-/draftjs-utils-0.8.8.tgz#5835daed95f59d3ee1f96fdcbbb9809772c86490"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -3522,7 +3555,7 @@ image-size@~0.5.0:
   version "0.5.5"
   resolved "http://registry.npm.taobao.org/image-size/download/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
 
-immutable@^3.7.4:
+immutable@^3.7.4, immutable@^3.8.1:
   version "3.8.2"
   resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 

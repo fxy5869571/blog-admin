@@ -45,7 +45,7 @@ const blogFetch = (
     }
   } else {
     initObj = {
-      body: dataStr,
+      body: JSON.stringify(data),
       headers: new Headers({
         Accept: 'application/json',
         'Content-Type': 'application/json'

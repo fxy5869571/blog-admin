@@ -21,7 +21,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => ({
       type: DELETE_ARTICLE
     })
   },
-  fetchArticle: (payload: IPayload) => {
+  fetchArticle: (payload: IPayload={}) => {
     dispatch({
       payload,
       type: REQUEST_ARTICLES

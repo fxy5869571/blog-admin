@@ -11,8 +11,8 @@ const articles = (state: object = {}, action: ArticlesAction): object => {
     case RECEIVE_ARTICLES:
       return {
         articles: action.articles,
-        total: action.total,
-        ...state
+        payload: action.payload,
+        total: action.total
       }
     default:
       return state

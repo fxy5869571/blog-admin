@@ -20,7 +20,7 @@ const RouterList: any[] = [
   {
     component: () => import('../components/Login/Login'),
     path: '/login'
-  },
+  }
 ]
 const RouterMap = () => (
   <Router>
