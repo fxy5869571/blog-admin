@@ -15,21 +15,10 @@ interface IArticle extends FormComponentProps {
   nature?: string
   addArticle?: (payload: object) => void
 }
-interface IState {
-  visible: boolean
-}
 class Login extends React.Component<IArticle> {
-  public static getDerivedStateFromProps(
-    { visible }: IArticle,
-    prevState: IState
-  ) {
-    console.log(prevState)
-    if (visible === prevState.visible) {
-      return null
-    } else {
-      return {
-        visible
-      }
+  public static getDerivedStateFromProps(nextProps: IArticle) {
+    return {
+      visible: nextProps.visible
     }
   }
   public state = {
@@ -56,7 +45,6 @@ class Login extends React.Component<IArticle> {
   public render() {
     const { getFieldDecorator } = this.props.form
     const { content, type, tag, nature, title, abstract } = this.props
-    console.log(this.state.visible)
     const selectBefore = getFieldDecorator('nature', { initialValue: nature })(
       <Select style={{ width: 70 }}>
         <Option value="原创">原创</Option>

@@ -64,7 +64,6 @@ class Articles extends React.Component<IProps> {
       article,
       visible: true
     })
-    console.log(article)
   }
   public render() {
     const { props, state } = this
@@ -147,7 +146,7 @@ class Articles extends React.Component<IProps> {
       }
     ]
     return (
-      <>
+      <div>
         <EditArticle {...article} visible={visible} />
         <div className="search-form">
           <SearchForm />
@@ -166,7 +165,7 @@ class Articles extends React.Component<IProps> {
             total
           }}
         />
-      </>
+      </div>
     )
   }
 }
