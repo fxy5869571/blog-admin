@@ -1,15 +1,21 @@
-import { Button, message, Modal, Table, Tag } from 'antd'
+import { Button, message, Modal, Table, Tag, Tooltip } from 'antd'
+
 import { ColumnProps } from 'antd/lib/table'
 import * as React from 'react'
 import { IPayload } from '../../actions/articles'
+// import AddArticle from '../AddArticle/AddArticle'
 import SearchForm from './SearchForm'
 import './style.less'
 const confirm = Modal.confirm
+interface ITag {
+  title: string
+  color: string
+}
 interface IArticle {
   _id: string
   content: string
   title: string
-  tag: string[]
+  tag: string | ITag
   create_at: string
   access: string
   abstract: string
@@ -71,24 +77,49 @@ class Articles extends React.Component<IProps> {
       }
     })
   }
+  public handleCancel = () => {
+    this.setState({
+      visible: false
+    })
+  }
   public render() {
     const { state, props } = this
     const { pageIndex, pageSize } = state
     const { articles, total } = props
+    console.log(this.props)
     const columns: Array<ColumnProps<IArticle>> = [
+      {
+        key: 'nature',
+        render: text => <h4>{text.nature || '原创'}</h4>,
+        title: '文章类型'
+      },
       {
         key: 'title',
         render: text => <h4>{text.title}</h4>,
         title: '文章标题'
       },
       {
-        dataIndex: 'abstract',
         key: 'abstract',
+        render: _ => (
+          <Tooltip title={_.abstract}>
+            <p className="abstract">{_.abstract}</p>
+          </Tooltip>
+        ),
         title: '文章简介'
       },
       {
         key: 'tag',
-        render: text => <Tag key={text.tag}>{text.tag}</Tag>,
+        render: _ => {
+          if (typeof _.tag === 'string') {
+            return <Tag key={_.tag}>{_.tag}</Tag>
+          } else {
+            return (
+              <Tag key={_.tag.title} color={_.tag.color}>
+                {_.tag.title}
+              </Tag>
+            )
+          }
+        },
         title: '标签'
       },
       {
@@ -98,9 +129,7 @@ class Articles extends React.Component<IProps> {
       },
       {
         key: 'create_at',
-        render: text => (
-          <span>{new Date(text.create_at).toLocaleString()}</span>
-        ),
+        render: _ => <span>{new Date(_.create_at).toLocaleString()}</span>,
         title: '发表时间'
       },
       {

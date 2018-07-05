@@ -10,7 +10,7 @@ import {
   REQUEST_ARTICLES
 } from '../actions/articles'
 
-import { addArticle, fetchArticles } from '../services'
+import { addArticle, deleteArticle, fetchArticles } from '../services'
 interface IState {
   articles: IArticles
 }
@@ -25,15 +25,18 @@ function* yieldArticles(action: ArticlesAction) {
   const { payload } = action
   const response = yield call(fetchArticles, payload)
   const { articles, total } = response
-  yield put({ type: RECEIVE_ARTICLES, articles, total })
+  yield put({ type: RECEIVE_ARTICLES, articles, total, payload })
 }
-function* deleteArticle(action: IDeleteArticles) {
+function* yieldDeleteArticle(action: IDeleteArticles) {
   console.log(action.id)
-  const payload = yield select((state: IState) => state.articles.payload)
-  yield put({ type: REQUEST_ARTICLES, payload })
+  const response = yield call(deleteArticle, { id: action.id })
+  if (response) {
+    const payload = yield select((state: IState) => state.articles.payload)
+    yield put({ type: REQUEST_ARTICLES, payload })
+  }
 }
 export function* watchYieldArticles() {
   yield takeEvery(ADD_ARTICLE, yieldAddArticle)
   yield takeEvery(REQUEST_ARTICLES, yieldArticles)
-  yield takeEvery(DELETE_ARTICLE, deleteArticle)
+  yield takeEvery(DELETE_ARTICLE, yieldDeleteArticle)
 }

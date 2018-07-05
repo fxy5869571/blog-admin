@@ -8,6 +8,8 @@ export const fetchArticles = (payLoad: IPayload) =>
 export const addArticle = (payload: object) =>
   blogFetch('/add-article', payload, 'POST')
 
+export const deleteArticle = (payload: object) =>
+  blogFetch('/delete-article', payload, 'POST')
 export const fetchInfo = () => blogFetch('/info')
 
 export const fetchResume = () => blogFetch('/resume')
