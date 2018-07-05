@@ -9,6 +9,7 @@ const articles = (state: object = {}, action: ArticlesAction): object => {
     case REQUEST_ARTICLES:
       return { payload: action.payload, ...state }
     case RECEIVE_ARTICLES:
+      console.log(action)
       return {
         articles: action.articles,
         payload: action.payload,

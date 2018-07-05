@@ -8,10 +8,12 @@ interface IState {
 interface IArticles {
   articles: object[]
   total: number
+  payload: IPayload
 }
-const mapStateToProps = (state: IState): object => ({
-  articles: state.articles.articles,
-  total: state.articles.total
+const mapStateToProps = ({ articles }: IState): object => ({
+  articles: articles.articles,
+  payload: articles.payload || { pageIndex: 1, pageSize: 10 },
+  total: articles.total
 })
 
 export const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -21,7 +23,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => ({
       type: DELETE_ARTICLE
     })
   },
-  fetchArticle: (payload: IPayload={}) => {
+  fetchArticle: (payload: IPayload = {}) => {
     dispatch({
       payload,
       type: REQUEST_ARTICLES

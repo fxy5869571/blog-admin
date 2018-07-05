@@ -28,7 +28,6 @@ function* yieldArticles(action: ArticlesAction) {
   yield put({ type: RECEIVE_ARTICLES, articles, total, payload })
 }
 function* yieldDeleteArticle(action: IDeleteArticles) {
-  console.log(action.id)
   const response = yield call(deleteArticle, { id: action.id })
   if (response) {
     const payload = yield select((state: IState) => state.articles.payload)

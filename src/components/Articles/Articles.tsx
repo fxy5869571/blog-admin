@@ -3,7 +3,7 @@ import { Button, message, Modal, Table, Tag, Tooltip } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import * as React from 'react'
 import { IPayload } from '../../actions/articles'
-// import AddArticle from '../AddArticle/AddArticle'
+import EditArticle from './EditArticle'
 import SearchForm from './SearchForm'
 import './style.less'
 const confirm = Modal.confirm
@@ -28,41 +28,23 @@ interface IProps {
   articles: IArticle[]
   history: IHistory
   total: number
+  payload: IPayload
   fetchArticle: (payload: IPayload) => void
   deleteArticle: (id: string) => void
 }
 class Articles extends React.Component<IProps> {
   public state = {
-    pageIndex: 1,
-    pageSize: 10
+    article: {},
+    visible: false
   }
-  public onChange = (page: number, pageSize: number) => {
-    this.setState(
-      {
-        pageIndex: page,
-        pageSize
-      },
-      () => {
-        this.props.fetchArticle(this.state)
-      }
-    )
+  public onChange = (pageIndex: number, pageSize: number) => {
+    this.props.fetchArticle({ pageIndex, pageSize })
   }
-  public onShowSizeChange = (current: number, pageSize: number) => {
-    this.setState(
-      {
-        pageIndex: current,
-        pageSize
-      },
-      () => {
-        this.props.fetchArticle({
-          pageIndex: current,
-          pageSize
-        })
-      }
-    )
+  public onShowSizeChange = (pageIndex: number, pageSize: number) => {
+    this.props.fetchArticle({ pageIndex, pageSize })
   }
   public componentDidMount() {
-    this.props.fetchArticle(this.state)
+    this.props.fetchArticle({ pageIndex: 1, pageSize: 10 })
   }
   public deleteArticle = (id: string) => {
     confirm({
@@ -77,20 +59,22 @@ class Articles extends React.Component<IProps> {
       }
     })
   }
-  public handleCancel = () => {
+  public editArticle = (article: IArticle) => {
     this.setState({
-      visible: false
+      article,
+      visible: true
     })
+    console.log(article)
   }
   public render() {
-    const { state, props } = this
-    const { pageIndex, pageSize } = state
-    const { articles, total } = props
-    console.log(this.props)
+    const { props, state } = this
+    const { visible, article } = state
+    const { articles, total, payload } = props
+    const { pageIndex, pageSize } = payload
     const columns: Array<ColumnProps<IArticle>> = [
       {
         key: 'nature',
-        render: text => <h4>{text.nature || '原创'}</h4>,
+        render: text => <h4>{text.nature}</h4>,
         title: '文章类型'
       },
       {
@@ -140,20 +124,21 @@ class Articles extends React.Component<IProps> {
       },
       {
         key: 'action',
-        render: article => (
+        render: _ => (
           <span>
             <Button
               icon="edit"
               type="primary"
               size="small"
-              style={{ marginRight: 10 }}>
+              style={{ marginRight: 10 }}
+              onClick={() => this.editArticle(_)}>
               编辑
             </Button>
             <Button
               icon="delete"
               type="danger"
               size="small"
-              onClick={() => this.deleteArticle(article._id)}>
+              onClick={() => this.deleteArticle(_._id)}>
               删除
             </Button>
           </span>
@@ -163,6 +148,7 @@ class Articles extends React.Component<IProps> {
     ]
     return (
       <>
+        <EditArticle {...article} visible={visible} />
         <div className="search-form">
           <SearchForm />
         </div>
