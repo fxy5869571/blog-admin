@@ -2,16 +2,29 @@ import 'whatwg-fetch'
 import { IPayload } from '../actions/articles'
 import { blogFetch } from '../common'
 
-export const fetchArticles = (payLoad: IPayload) =>
-  blogFetch('/articles', payLoad)
+const fetchArticles = (payLoad: IPayload) => blogFetch('/articles', payLoad)
 
-export const addArticle = (payload: object) =>
+const addArticle = (payload: object) =>
   blogFetch('/add-article', payload, 'POST')
 
-export const deleteArticle = (payload: object) =>
+const updateArticle = (payload: object) =>
+  blogFetch('/update-article', payload, 'POST')
+
+const deleteArticle = (payload: object) =>
   blogFetch('/delete-article', payload, 'POST')
-export const fetchInfo = () => blogFetch('/info')
 
-export const fetchResume = () => blogFetch('/resume')
+const fetchInfo = () => blogFetch('/info')
 
-export const fetchArticle = (Id: string) => blogFetch('/article', { Id })
+const fetchResume = () => blogFetch('/resume')
+
+const fetchArticle = (Id: string) => blogFetch('/article', { Id })
+
+export {
+  fetchArticle,
+  fetchResume,
+  deleteArticle,
+  fetchInfo,
+  fetchArticles,
+  updateArticle,
+  addArticle
+}

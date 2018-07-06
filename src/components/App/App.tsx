@@ -110,11 +110,10 @@ class App extends React.Component<IProps> {
     const { collapsed, tagList, isMobile, theme } = this.state
     const isLogin = location.pathname === '/login'
     return !isLogin ? (
-      <Layout className="menu" style={{ minHeight: '100vh' }}>
+      <Layout className="menu" style={{ height: '100vh' }}>
         {!isMobile && (
           <Sider
             theme={theme ? 'dark' : 'light'}
-            style={{ minHeight: '100vh' }}
             trigger={null}
             collapsed={collapsed}
             collapsible={true}>
@@ -164,18 +163,13 @@ class App extends React.Component<IProps> {
             pathname={location.pathname}
             onClose={this.onClose}
           />
-          <Content
-            style={{
-              background: '#fff',
-              margin: '0 16px 24px 16px',
-              padding: 24
-            }}>
-            {children}
+          <Content className="content">
+            <div>{children}</div>
           </Content>
         </Layout>
       </Layout>
     ) : (
-      { children }
+      <div>{children}</div>
     )
   }
 }

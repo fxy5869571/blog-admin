@@ -14,37 +14,26 @@ interface IArticle extends FormComponentProps {
   content?: string
   nature?: string
   addArticle?: (payload: object) => void
+  toggleVisible: (visible: boolean) => void
+  editArticle: (payload: object) => void
 }
 class Login extends React.Component<IArticle> {
-  public static getDerivedStateFromProps(nextProps: IArticle) {
-    return {
-      visible: nextProps.visible
-    }
-  }
-  public state = {
-    visible: false
-  }
-  public handleSubmit = (e: any) => {
-    e.preventDefault()
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log(values)
-      }
-    })
-  }
   public handleCancel = () => {
-    this.setState({
-      visible: false
-    })
+    this.props.toggleVisible(false)
   }
-  public handleOk = () => {
-    this.setState({
-      visible: false
+  public handleOk = (e: any) => {
+    e.preventDefault()
+    const { form, toggleVisible, editArticle, _id } = this.props
+    form.validateFields((err, values) => {
+      if (!err) {
+        editArticle({ ...values, _id })
+        toggleVisible(false)
+      }
     })
   }
   public render() {
     const { getFieldDecorator } = this.props.form
-    const { content, type, tag, nature, title, abstract } = this.props
+    const { content, type, tag, nature, title, abstract, visible } = this.props
     const selectBefore = getFieldDecorator('nature', { initialValue: nature })(
       <Select style={{ width: 70 }}>
         <Option value="原创">原创</Option>
@@ -53,13 +42,13 @@ class Login extends React.Component<IArticle> {
     )
     return (
       <Modal
-        width={1400}
-        destroyOnClose={true}
+        width="80%"
         title="文章编辑"
-        visible={this.state.visible}
+        destroyOnClose={true}
+        visible={visible}
         onOk={this.handleOk}
         onCancel={this.handleCancel}>
-        <Form onSubmit={this.handleSubmit} layout="inline">
+        <Form layout="inline">
           <FormItem hasFeedback={true} label="文章标题">
             {getFieldDecorator('title', {
               initialValue: title,

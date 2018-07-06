@@ -15,11 +15,18 @@ const DELETE_ARTICLE = 'DELETE_ARTICLE'
 type DELETE_ARTICLE = typeof DELETE_ARTICLE
 const ADD_ARTICLE = 'ADD_ARTICLE'
 type ADD_ARTICLE = typeof ADD_ARTICLE
+const VISIBLE_ARTICLE = 'VISIBLE_ARTICLE'
+type VISIBLE_ARTICLE = typeof VISIBLE_ARTICLE
+const EDIT_ARTICLE = 'EDIT_ARTICLE'
+type EDIT_ARTICLE = typeof EDIT_ARTICLE
 
 // blog articles action
-
 interface IAddArticles {
   type: ADD_ARTICLE
+  payload: object
+}
+interface IEditArticles {
+  type: EDIT_ARTICLE
   payload: object
 }
 interface IRequestArticles {
@@ -36,14 +43,22 @@ interface IReceiveArticles {
   total: number
   articles: object[]
 }
+interface IVisibleArticle {
+  type: VISIBLE_ARTICLE
+  visible: boolean
+}
 type ArticlesAction = IRequestArticles | IReceiveArticles
 export {
+  EDIT_ARTICLE,
+  VISIBLE_ARTICLE,
   ADD_ARTICLE,
   ArticlesAction,
   DELETE_ARTICLE,
   REQUEST_ARTICLES,
   RECEIVE_ARTICLES,
+  IEditArticles,
   IPayload,
   IAddArticles,
+  IVisibleArticle,
   IDeleteArticles
 }

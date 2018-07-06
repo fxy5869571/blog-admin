@@ -1,7 +1,9 @@
 import {
   ArticlesAction,
+  IVisibleArticle,
   RECEIVE_ARTICLES,
-  REQUEST_ARTICLES
+  REQUEST_ARTICLES,
+  VISIBLE_ARTICLE
 } from '../actions/articles'
 
 const articles = (state: object = {}, action: ArticlesAction): object => {
@@ -19,4 +21,12 @@ const articles = (state: object = {}, action: ArticlesAction): object => {
       return state
   }
 }
-export default articles
+const visible = (state: boolean = false, action: IVisibleArticle): boolean => {
+  switch (action.type) {
+    case VISIBLE_ARTICLE:
+      return action.visible
+    default:
+      return state
+  }
+}
+export { visible, articles }

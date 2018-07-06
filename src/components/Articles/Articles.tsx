@@ -1,5 +1,4 @@
 import { Button, message, Modal, Table, Tag, Tooltip } from 'antd'
-
 import { ColumnProps } from 'antd/lib/table'
 import * as React from 'react'
 import { IPayload } from '../../actions/articles'
@@ -29,13 +28,15 @@ interface IProps {
   history: IHistory
   total: number
   payload: IPayload
+  visible: boolean
   fetchArticle: (payload: IPayload) => void
   deleteArticle: (id: string) => void
+  toggleVisible: (visible: boolean) => void
+  editArticle: (payload: object) => void
 }
 class Articles extends React.Component<IProps> {
   public state = {
-    article: {},
-    visible: false
+    article: {}
   }
   public onChange = (pageIndex: number, pageSize: number) => {
     this.props.fetchArticle({ pageIndex, pageSize })
@@ -44,6 +45,7 @@ class Articles extends React.Component<IProps> {
     this.props.fetchArticle({ pageIndex, pageSize })
   }
   public componentDidMount() {
+    console.log(11)
     this.props.fetchArticle({ pageIndex: 1, pageSize: 10 })
   }
   public deleteArticle = (id: string) => {
@@ -60,15 +62,18 @@ class Articles extends React.Component<IProps> {
     })
   }
   public editArticle = (article: IArticle) => {
-    this.setState({
-      article,
-      visible: true
-    })
+    this.props.toggleVisible(true)
+    this.setState({ article })
   }
   public render() {
-    const { props, state } = this
-    const { visible, article } = state
-    const { articles, total, payload } = props
+    const {
+      articles,
+      total,
+      payload,
+      toggleVisible,
+      visible,
+      editArticle
+    } = this.props
     const { pageIndex, pageSize } = payload
     const columns: Array<ColumnProps<IArticle>> = [
       {
@@ -147,7 +152,12 @@ class Articles extends React.Component<IProps> {
     ]
     return (
       <div>
-        <EditArticle {...article} visible={visible} />
+        <EditArticle
+          {...this.state.article}
+          toggleVisible={toggleVisible}
+          visible={visible}
+          editArticle={editArticle}
+        />
         <div className="search-form">
           <SearchForm />
         </div>
