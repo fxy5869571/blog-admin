@@ -3,12 +3,38 @@ import { FormComponentProps } from 'antd/lib/form'
 import * as React from 'react'
 import './style.less'
 const FormItem = Form.Item
-interface IUserFormProps extends FormComponentProps {
+
+interface IProps extends FormComponentProps {
   userName: string
   password: string
+  login: (payload: object) => void
+  loading: boolean
+  token?: string
+  history: IPush
 }
-class Login extends React.Component<IUserFormProps, any> {
+interface IPush {
+  push: (pathname: string) => void
+}
+
+class Login extends React.Component<IProps, any> {
+  public static getDerivedStateFromProps(props: IProps) {
+    const { history, token } = props
+    if (token) {
+      history.push('/')
+    }
+    return {}
+  }
+  public handleSubmit = (e: any) => {
+    e.preventDefault()
+    const { form, login } = this.props
+    form.validateFields((err, values) => {
+      if (!err) {
+        login(values)
+      }
+    })
+  }
   public render() {
+    const { loading } = this.props
     const { getFieldDecorator } = this.props.form
     return (
       <div className="login">
@@ -16,7 +42,7 @@ class Login extends React.Component<IUserFormProps, any> {
           <img alt="logo" src="http://antd-admin.zuiidea.com/public/logo.svg" />
           <span>Blog ADMIN</span>
         </div>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <FormItem hasFeedback={true}>
             {getFieldDecorator('userName', {
               rules: [{ required: true, message: '账号不能为空!' }]
@@ -50,6 +76,7 @@ class Login extends React.Component<IUserFormProps, any> {
           </FormItem>
           <FormItem>
             <Button
+              loading={loading}
               type="primary"
               htmlType="submit"
               className="login-form-button">

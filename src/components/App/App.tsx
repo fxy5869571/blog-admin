@@ -5,6 +5,7 @@ import Header from '../Layout/Header/Header'
 import Menu, { IMenuItem } from '../Layout/Menu/Menu'
 import Tags from '../Layout/Tags/Tags'
 import './style.less'
+
 const { Sider, Content } = Layout
 interface IHistory {
   push: (pathname: string) => void
@@ -16,6 +17,7 @@ interface IProps {
   children: ReactHTML
   location: ILocation
   history: IHistory
+  isLogin: () => void
 }
 
 class App extends React.Component<IProps> {
@@ -60,6 +62,7 @@ class App extends React.Component<IProps> {
     theme: true
   }
   public componentDidMount() {
+    this.props.isLogin()
     this.onResize()
     this.setState({
       tagList: JSON.parse(localStorage.getItem('tagList') || '[]')

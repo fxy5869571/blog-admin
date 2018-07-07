@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import { IPayload } from '../actions/articles'
 import { blogFetch } from '../common'
 
-const fetchArticles = (payLoad: IPayload) => blogFetch('/articles', payLoad)
+const fetchArticles = (payLoad: IPayload) => blogFetch('/get-articles', payLoad)
 
 const addArticle = (payload: object) =>
   blogFetch('/add-article', payload, 'POST')
@@ -17,10 +17,10 @@ const fetchInfo = () => blogFetch('/info')
 
 const fetchResume = () => blogFetch('/resume')
 
-const fetchArticle = (Id: string) => blogFetch('/article', { Id })
+const login = (payload: object) => blogFetch('/login', payload, 'POST')
 
 export {
-  fetchArticle,
+  login,
   fetchResume,
   deleteArticle,
   fetchInfo,

@@ -1,30 +1,26 @@
 import { connect, Dispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import App from '../components/App/App'
-import { REQUEST_INFO } from '../constants'
-interface ITitle {
-  title: string
-}
-interface IArticles {
-  articles: ITitle[]
-}
+import { RECEIVE_TOKEN, REQUEST_INFO } from '../constants'
+
 interface IInfo {
   info: object
-  articles: IArticles
 }
 
-const mapStateToProps = ({ articles, info }: IInfo) => {
-  if (articles.articles) {
-    return {
-      articleTitle: articles.articles.map(item => item.title),
-      info
-    }
-  }
+const mapStateToProps = ({ info }: IInfo) => {
   return { info }
 }
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
-  return { actions: dispatch({ type: REQUEST_INFO }) }
+  return {
+    actions: dispatch({ type: REQUEST_INFO }),
+    isLogin: () => {
+      const user = localStorage.getItem('user')
+      if (user) {
+        dispatch({ type: RECEIVE_TOKEN, user: JSON.parse(user) })
+      }
+    }
+  }
 }
 const AppMap: any = connect(
   mapStateToProps,

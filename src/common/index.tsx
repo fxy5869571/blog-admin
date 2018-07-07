@@ -46,7 +46,11 @@ const blogFetch = (
     .then(response => response.json())
     .then(response => {
       if (response.message) {
-        message.success(response.message)
+        if (response.type === 'error') {
+          message.warning(response.message)
+        } else {
+          message.success(response.message)
+        }
       }
       return response
     })

@@ -1,4 +1,11 @@
-import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects'
+import {
+  all,
+  call,
+  put,
+  select,
+  takeEvery,
+  takeLatest
+} from 'redux-saga/effects'
 import {
   ADD_ARTICLE,
   ArticlesAction,
@@ -49,8 +56,10 @@ function* yieldEditArticle(action: IEditArticles) {
   }
 }
 export function* watchYieldArticles() {
-  yield takeLatest(ADD_ARTICLE, yieldAddArticle)
-  yield takeEvery(REQUEST_ARTICLES, yieldArticles)
-  yield takeEvery(DELETE_ARTICLE, yieldDeleteArticle)
-  yield takeLatest(EDIT_ARTICLE, yieldEditArticle)
+  yield all([
+    takeLatest(ADD_ARTICLE, yieldAddArticle),
+    takeEvery(REQUEST_ARTICLES, yieldArticles),
+    takeEvery(DELETE_ARTICLE, yieldDeleteArticle),
+    takeLatest(EDIT_ARTICLE, yieldEditArticle)
+  ])
 }

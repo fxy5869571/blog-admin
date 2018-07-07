@@ -67,6 +67,15 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
+"@types/react-router-redux@^5.0.15":
+  version "5.0.15"
+  resolved "http://registry.npm.taobao.org/@types/react-router-redux/download/@types/react-router-redux-5.0.15.tgz#aebc593bd3426adb6ae2eba6ac8c919ee232ce7b"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+    redux ">= 3.7.2"
+
 "@types/react-router@*":
   version "4.0.25"
   resolved "http://registry.npm.taobao.org/@types/react-router/download/@types/react-router-4.0.25.tgz#1e25490780b80e0d8f96bf649379cca8638c1e5a"
@@ -6437,6 +6446,10 @@ react-router-dom@^4.2.2:
     react-router "^4.2.0"
     warning "^3.0.0"
 
+react-router-redux@^4.0.8:
+  version "4.0.8"
+  resolved "http://registry.npm.taobao.org/react-router-redux/download/react-router-redux-4.0.8.tgz#227403596b5151e182377dab835b5d45f0f8054e"
+
 react-router@^4.2.0:
   version "4.2.0"
   resolved "http://registry.npm.taobao.org/react-router/download/react-router-4.2.0.tgz#61f7b3e3770daeb24062dae3eedef1b054155986"
@@ -6611,7 +6624,7 @@ redux-saga@^1.0.0-beta.1:
   dependencies:
     redux ">=0.10 <5"
 
-"redux@>=0.10 <5", redux@^4.0.0:
+"redux@>= 3.7.2", "redux@>=0.10 <5", redux@^4.0.0:
   version "4.0.0"
   resolved "http://registry.npm.taobao.org/redux/download/redux-4.0.0.tgz#aa698a92b729315d22b34a0553d7e6533555cc03"
   dependencies:
