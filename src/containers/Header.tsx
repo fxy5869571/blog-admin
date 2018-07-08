@@ -1,25 +1,23 @@
 import { connect, Dispatch } from 'react-redux'
-import { REQUEST_TOKEN } from '../actions/user'
-import Login from '../components/Login/Login'
+import { CLEAR_TOKEN } from '../actions/user'
+import Header from '../components/Layout/Header/Header'
 
 interface IUser {
-  loading: boolean
-  token?: string
+  userName: string
 }
 
 interface IState {
   user: IUser
 }
 const mapStateToProps = ({ user }: IState) => {
-  const { loading, token } = user
-  return { loading, token }
+  return { userName: user.userName }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  login: (payload: object) => {
-    dispatch({ type: REQUEST_TOKEN, payload })
+  logout: () => {
+    dispatch({ type: CLEAR_TOKEN })
   }
 })
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(Header)

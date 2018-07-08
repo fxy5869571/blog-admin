@@ -45,7 +45,6 @@ class Articles extends React.Component<IProps> {
     this.props.fetchArticle({ pageIndex, pageSize })
   }
   public componentDidMount() {
-    console.log(11)
     this.props.fetchArticle({ pageIndex: 1, pageSize: 10 })
   }
   public deleteArticle = (id: string) => {
@@ -117,7 +116,7 @@ class Articles extends React.Component<IProps> {
       },
       {
         key: 'create_at',
-        render: _ => <span>{new Date(_.create_at).toLocaleString()}</span>,
+        render: _ => <span>{new Date(_.create_at).toLocaleDateString()}</span>,
         title: '发表时间'
       },
       {
@@ -162,6 +161,7 @@ class Articles extends React.Component<IProps> {
           <SearchForm />
         </div>
         <Table
+          scroll={{ x: 1000 }}
           columns={columns}
           bordered={true}
           dataSource={articles}

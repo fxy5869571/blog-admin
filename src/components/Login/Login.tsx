@@ -22,8 +22,9 @@ class Login extends React.Component<IProps, any> {
     if (token) {
       history.push('/')
     }
-    return {}
+    return null
   }
+  public state = {}
   public handleSubmit = (e: any) => {
     e.preventDefault()
     const { form, login } = this.props

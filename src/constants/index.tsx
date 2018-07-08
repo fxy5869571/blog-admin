@@ -9,9 +9,3 @@ export const REQUEST_RESUME = 'REQUEST_RESUME'
 export type REQUEST_RESUME = typeof REQUEST_RESUME
 export const RECEIVE_RESUME = 'RECEIVE_RESUME'
 export type RECEIVE_RESUME = typeof RECEIVE_RESUME
-
-// blog  login const
-export const REQUEST_TOKEN = 'REQUEST_TOKEN'
-export type REQUEST_TOKEN = typeof REQUEST_TOKEN
-export const RECEIVE_TOKEN = 'RECEIVE_TOKEN'
-export type RECEIVE_TOKEN = typeof RECEIVE_TOKEN

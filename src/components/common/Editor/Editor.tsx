@@ -6,6 +6,7 @@ import './style.less'
 interface IProps {
   value?: string
   onChange?: (value: string) => void
+  placeholder?: string
 }
 interface IEditor {
   loaded: number
@@ -45,11 +46,15 @@ class Editor extends React.Component<IProps> {
         uploadFn: this.uploadFn // 指定上传函数，说明见下文
       },
       onChange: this.handleChange,
-      placeholder: '发表文章，记录自己这段时间的学习，技术需要沉淀'
+      placeholder:
+        this.props.placeholder ||
+        '发表文章，记录自己这段时间的学习，技术需要沉淀'
     }
-    return <div className="braft-editor">
+    return (
+      <div className="braft-editor">
         <BraftEditor {...editorProps} />
       </div>
+    )
   }
 }
 

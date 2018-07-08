@@ -32,11 +32,17 @@ const blogFetch = (
       }
     }
   } else {
-    console.log(data)
+    let token = ''
+    const user = localStorage.getItem('user')
+    if (user) {
+      token = JSON.parse(user).token
+    }
+    console.log(token)
     initObj = {
       body: JSON.stringify(data),
       headers: new Headers({
         Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
       }),
       method

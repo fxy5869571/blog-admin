@@ -13,7 +13,7 @@ interface IArticle extends FormComponentProps {
   nature: string
   addArticle: (payload: object) => void
 }
-class Login extends React.Component<IArticle> {
+class AddArticle extends React.Component<IArticle> {
   public handleSubmit = (e: any) => {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
@@ -88,4 +88,4 @@ class Login extends React.Component<IArticle> {
   }
 }
 
-export default Form.create()(Login)
+export default Form.create()(AddArticle)

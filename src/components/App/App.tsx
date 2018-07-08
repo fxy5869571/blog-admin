@@ -1,13 +1,13 @@
 import { Icon, Layout, Switch } from 'antd'
 import * as React from 'react'
 import { ReactHTML } from 'react'
-import Header from '../Layout/Header/Header'
+import Header from '../../containers/Header'
 import Menu, { IMenuItem } from '../Layout/Menu/Menu'
 import Tags from '../Layout/Tags/Tags'
 import './style.less'
 
 const { Sider, Content } = Layout
-interface IHistory {
+export interface IHistory {
   push: (pathname: string) => void
 }
 interface ILocation {
@@ -18,6 +18,7 @@ interface IProps {
   location: ILocation
   history: IHistory
   isLogin: () => void
+  token: string
 }
 
 class App extends React.Component<IProps> {
@@ -149,6 +150,7 @@ class App extends React.Component<IProps> {
         )}
         <Layout>
           <Header
+            push={this.props.history.push}
             collapsed={collapsed}
             toggle={this.toggle}
             isMobile={isMobile}>

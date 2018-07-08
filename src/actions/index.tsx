@@ -1,10 +1,8 @@
 import {
   RECEIVE_INFO,
   RECEIVE_RESUME,
-  RECEIVE_TOKEN,
   REQUEST_INFO,
-  REQUEST_RESUME,
-  REQUEST_TOKEN
+  REQUEST_RESUME
 } from '../constants'
 
 // blog info action
@@ -26,15 +24,3 @@ export interface IReceiveResume {
   resume: object
 }
 export type ResumeAction = IRequestResume | IReceiveResume
-
-// blog login action
-export interface IRequestToken {
-  type: REQUEST_TOKEN
-  payload: object
-}
-export interface IReceiveToken {
-  type: RECEIVE_TOKEN
-  user: object
-  payload: object
-}
-export type TokenAction = IRequestToken | IReceiveToken

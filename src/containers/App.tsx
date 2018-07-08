@@ -1,19 +1,19 @@
 import { connect, Dispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { RECEIVE_TOKEN } from '../actions/user'
 import App from '../components/App/App'
-import { RECEIVE_TOKEN, REQUEST_INFO } from '../constants'
 
 interface IInfo {
   info: object
+  user: any
 }
 
-const mapStateToProps = ({ info }: IInfo) => {
-  return { info }
+const mapStateToProps = ({ info, user }: IInfo) => {
+  return { info, token: user.token }
 }
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    actions: dispatch({ type: REQUEST_INFO }),
     isLogin: () => {
       const user = localStorage.getItem('user')
       if (user) {

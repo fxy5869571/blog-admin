@@ -49,16 +49,19 @@
   .header{
     display: flex;
     justify-content: space-between;
-    .trigger:hover {
+    .user:hover {
       color: #1890ff;
       background-color: rgba(24,144,255,.15);
     }
-    .trigger {
-      font-size: 18px;
+    .user {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       line-height: 64px;
       padding: 0 20px;
       cursor: pointer;
       transition: all .3s;
+      margin-right: 20px;
     }
   }
   .content{
