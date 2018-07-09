@@ -1,4 +1,4 @@
-import { Modal, Timeline } from 'antd'
+import { Modal, Pagination, Timeline } from 'antd'
 import * as React from 'react'
 import './style.less'
 const Item = Timeline.Item
@@ -9,13 +9,15 @@ interface ISay {
   _id: string
 }
 interface IProps {
+  payload: any
+  total: number
   say: ISay[]
-  fetchSay: () => void
+  fetchSay: (payload?: object) => void
   deleteSay: (id: string) => void
 }
 class Say extends React.Component<IProps> {
   public componentDidMount() {
-    this.props.fetchSay()
+    this.props.fetchSay({ pageIndex: 1, pageSize: 10 })
   }
   public deleteSay = (id: string) => {
     confirm({
@@ -25,13 +27,20 @@ class Say extends React.Component<IProps> {
       title: '确定删除这条说说?'
     })
   }
+  public onChange = (pageIndex: number, pageSize: number) => {
+    this.props.fetchSay({ pageIndex, pageSize })
+  }
+  public onShowSizeChange = (pageIndex: number, pageSize: number) => {
+    this.props.fetchSay({ pageIndex, pageSize })
+  }
   public render() {
-    console.log(this.props.say)
+    const { say, total, payload } = this.props
+    const { pageIndex, pageSize } = payload
     return (
       <div className="time-line-wrp">
         <Timeline className="time-line">
-          {this.props.say &&
-            this.props.say.map(item => (
+          {say &&
+            say.map(item => (
               <Item key={item._id}>
                 <div className="item" onClick={() => this.deleteSay(item._id)}>
                   <p dangerouslySetInnerHTML={{ __html: item.say }} />
@@ -42,6 +51,16 @@ class Say extends React.Component<IProps> {
               </Item>
             ))}
         </Timeline>
+        <div className="pagination">
+          <Pagination
+            current={pageIndex}
+            pageSize={pageSize}
+            total={total}
+            showSizeChanger={true}
+            onChange={this.onChange}
+            onShowSizeChange={this.onShowSizeChange}
+          />
+        </div>
       </div>
     )
   }

@@ -5,9 +5,8 @@ const say = (state = { say: [] }, action: SAYAction) => {
     case REQUEST_SAY:
       return { payload: action.payload }
     case RECEIVE_SAY:
-      console.log(action)
       return {
-        ...state,
+        payload: action.payload,
         say: action.say,
         total: action.total
       }

@@ -18,8 +18,7 @@ interface ISay {
 }
 function* yieldSay(action: SAYAction) {
   const response = yield call(getSay, action.payload)
-  console.log(response)
-  yield put({ type: RECEIVE_SAY, ...response })
+  yield put({ type: RECEIVE_SAY, ...response, payload: action.payload })
 }
 function* yieldAddSay(action: IAddSAY) {
   yield call(blogPost, '/add-say', action.payload)

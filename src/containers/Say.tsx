@@ -3,8 +3,9 @@ import { DELETE_SAY, REQUEST_SAY } from '../actions/say'
 import Say from '../components/Say/Say'
 
 const mapStateToProps = ({ say }: any) => ({
+  payload: say.payload || { pageIndex: 1, pageSize: 10 },
   say: say.say,
-  total: say.total
+  total: say.total || 0
 })
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   deleteSay: (id: string) => {
