@@ -27,7 +27,7 @@ interface IRequestSAY {
 }
 interface IDeleteSAY {
   type: DELETE_SAY
-  id: string
+  payload: object
 }
 interface IReceiveSAY {
   type: RECEIVE_SAY

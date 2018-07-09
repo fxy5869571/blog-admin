@@ -22,9 +22,9 @@ class AddSay extends React.Component<IProps, any> {
       <div>
         <Form onSubmit={this.handleSubmit} layout="inline">
           <FormItem>
-            {getFieldDecorator('say', {})(
-              <Editor placeholder="记录自己的心情" />
-            )}
+            {getFieldDecorator('say', {
+              rules: [{ required: true, message: '不能为空!' }]
+            })(<Editor placeholder="记录自己的心情" />)}
           </FormItem>
           <FormItem>
             <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>

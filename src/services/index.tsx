@@ -20,7 +20,8 @@ const fetchResume = () => blogFetch('/resume')
 const login = (payload: object) => blogFetch('/login', payload, 'POST')
 
 // say
-const blogPost = (payload: object) => blogFetch('/add-article', payload, 'POST')
+const blogPost = (url: string, payload: object) =>
+  blogFetch(url, payload, 'POST')
 
 const getSay = (payLoad: object) => blogFetch('/get-say', payLoad)
 export {

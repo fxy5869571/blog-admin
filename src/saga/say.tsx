@@ -14,25 +14,26 @@ interface IState {
   say: ISay
 }
 interface ISay {
-  payload: any
+  payload: object
 }
-function* yieldLogin(action: SAYAction) {
-  const { say } = yield call(getSay, action.payload)
-  yield put({ type: RECEIVE_SAY, say })
+function* yieldSay(action: SAYAction) {
+  const response = yield call(getSay, action.payload)
+  console.log(response)
+  yield put({ type: RECEIVE_SAY, ...response })
 }
 function* yieldAddSay(action: IAddSAY) {
-  yield call(blogPost, action.payload)
+  yield call(blogPost, '/add-say', action.payload)
   const payload = yield select((state: IState) => state.say.payload)
   yield put({ type: REQUEST_SAY, payload })
 }
 function* yieldDeleteSay(action: IDeleteSAY) {
-  yield call(blogPost, { id: action.id })
+  yield call(blogPost, '/delete-say', action.payload)
   const payload = yield select((state: IState) => state.say.payload)
   yield put({ type: REQUEST_SAY, payload })
 }
 export function* watchYieldSay() {
   yield all([
-    takeLatest(REQUEST_SAY, yieldLogin),
+    takeLatest(REQUEST_SAY, yieldSay),
     takeLatest(DELETE_SAY, yieldDeleteSay),
     takeLatest(ADD_SAY, yieldAddSay)
   ])
