@@ -13,15 +13,15 @@ const updateArticle = (payload: object) =>
 const deleteArticle = (payload: object) =>
   blogFetch('/delete-article', payload, 'POST')
 
-const fetchInfo = () => blogFetch('/info')
-
-const fetchResume = () => blogFetch('/resume')
-
-const login = (payload: object) => blogFetch('/login', payload, 'POST')
-
 // say
 const blogPost = (url: string, payload: object) =>
   blogFetch(url, payload, 'POST')
+
+const fetchInfo = () => blogFetch('/get-info')
+
+const fetchResume = () => blogFetch('/get-resume')
+
+const login = (payload: object) => blogFetch('/login', payload, 'POST')
 
 const getSay = (payLoad: object) => blogFetch('/get-say', payLoad)
 export {

@@ -43,7 +43,7 @@ class Say extends React.Component<IProps> {
             say.map(item => (
               <Item key={item._id}>
                 <div className="item" onClick={() => this.deleteSay(item._id)}>
-                  <p dangerouslySetInnerHTML={{ __html: item.say }} />
+                  <div dangerouslySetInnerHTML={{ __html: item.say }} />
                   <span className="posted">
                     发表于：{new Date(item.create_at).toLocaleString()}
                   </span>
