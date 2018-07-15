@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux'
 import { articles, visible } from './articles'
+import collect from './collect'
 import info from './info'
-import resume from './resume'
 import say from './say'
 import user from './user'
+
 const reducers = combineReducers({
   articles,
+  collect,
   info,
-  resume,
   say,
   user,
   visible

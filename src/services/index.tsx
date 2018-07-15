@@ -14,20 +14,22 @@ const deleteArticle = (payload: object) =>
   blogFetch('/delete-article', payload, 'POST')
 
 // say
+const getSay = (payLoad: object) => blogFetch('/get-say', payLoad)
+
 const blogPost = (url: string, payload: object) =>
   blogFetch(url, payload, 'POST')
 
 const fetchInfo = () => blogFetch('/get-info')
 
-const fetchResume = () => blogFetch('/get-resume')
+const fetchCollect = (payload: object) => blogFetch('/get-collect', payload)
 
 const login = (payload: object) => blogFetch('/login', payload, 'POST')
 
-const getSay = (payLoad: object) => blogFetch('/get-say', payLoad)
+
 export {
   blogPost,
   login,
-  fetchResume,
+  fetchCollect,
   deleteArticle,
   getSay,
   fetchInfo,

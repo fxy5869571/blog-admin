@@ -28,8 +28,8 @@ const RouterList: any[] = [
     path: '/add-article'
   },
   {
-    component: () => import('../containers/Resume'),
-    path: '/resumes'
+    component: () => import('../containers/Collect'),
+    path: '/edit-collect'
   },
   {
     component: () => import('../containers/Login'),

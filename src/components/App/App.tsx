@@ -44,6 +44,15 @@ class App extends React.Component<IProps> {
       label: '说说'
     },
     {
+      children: [
+        { label: '收藏管理', url: '/edit-collect', icon: 'form', key: '13' },
+        { label: '添加收藏', url: '/add-collect', icon: 'upload', key: '12' }
+      ],
+      icon: 'file-add',
+      key: '11',
+      label: '收藏'
+    },
+    {
       icon: 'exception',
       key: '9',
       label: '简历',

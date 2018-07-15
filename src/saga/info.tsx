@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { RECEIVE_INFO, REQUEST_INFO } from '../constants'
+import { RECEIVE_INFO, REQUEST_INFO } from '../actions'
 import { fetchInfo } from '../services'
 
 function* yieldInfo() {

@@ -1,5 +1,5 @@
 import { InfoAction } from '../actions'
-import { RECEIVE_INFO, REQUEST_INFO } from '../constants'
+import { RECEIVE_INFO, REQUEST_INFO } from '../actions'
 const info = (state: object = {}, action: InfoAction): object => {
   switch (action.type) {
     case REQUEST_INFO:

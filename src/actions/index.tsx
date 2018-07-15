@@ -1,9 +1,8 @@
-import {
-  RECEIVE_INFO,
-  RECEIVE_RESUME,
-  REQUEST_INFO,
-  REQUEST_RESUME
-} from '../constants'
+// blog info const
+export const REQUEST_INFO = 'REQUEST_INFO'
+export type REQUEST_INFO = typeof REQUEST_INFO
+export const RECEIVE_INFO = 'RECEIVE_INFO'
+export type RECEIVE_INFO = typeof RECEIVE_INFO
 
 // blog info action
 export interface IRequestInfo {
@@ -14,13 +13,3 @@ export interface IReceiveInfo {
   info: object
 }
 export type InfoAction = IRequestInfo | IReceiveInfo
-
-// blog resume action
-export interface IRequestResume {
-  type: REQUEST_RESUME
-}
-export interface IReceiveResume {
-  type: RECEIVE_RESUME
-  resume: object
-}
-export type ResumeAction = IRequestResume | IReceiveResume
