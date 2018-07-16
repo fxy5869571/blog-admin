@@ -7,9 +7,14 @@ import {
 const collect = (state: object = {}, action: collectAction): object => {
   switch (action.type) {
     case REQUEST_COLLECT:
-      return state
+      return { payload: action.payload }
     case RECEIVE_COLLECT:
-      return { ...state, ...action.collect }
+      console.log(state)
+      return {
+        ...state,
+        collect: action.collect,
+        total: action.total
+      }
     default:
       return state
   }

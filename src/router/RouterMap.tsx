@@ -32,6 +32,10 @@ const RouterList: any[] = [
     path: '/edit-collect'
   },
   {
+    component: () => import('../containers/AddCollect'),
+    path: '/add-collect'
+  },
+  {
     component: () => import('../containers/Login'),
     path: '/login'
   }

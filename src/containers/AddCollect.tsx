@@ -1,9 +1,17 @@
-import * as React from 'react'
+import { connect, Dispatch } from 'react-redux'
+import { ADD_COLLECT } from '../actions/collect'
+import AddCollect from '../components/AddCollect/AddCollect'
 
-class Tags extends React.Component {
-    public render() {
-        return <div>demo</div>
-    }
-}
+export const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addCollect: (payload: object) => {
+    dispatch({
+      payload,
+      type: ADD_COLLECT
+    })
+  }
+})
 
-export default Tags
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddCollect)

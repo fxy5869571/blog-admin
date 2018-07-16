@@ -11,7 +11,13 @@ const dataToString = (data: object) => {
   }
   return new URLSearchParams(array).toString()
 }
-
+const format = (date: string): string => {
+  const myDate = new Date(date)
+  const year = myDate.getFullYear()
+  const month = myDate.getMonth() + 1
+  const day = myDate.getDate()
+  return `${year}-${month}-${day}`
+}
 const blogFetch = (
   url: string,
   data?: object,
@@ -61,4 +67,4 @@ const blogFetch = (
       return response
     })
 }
-export { blogFetch }
+export { blogFetch, format }
