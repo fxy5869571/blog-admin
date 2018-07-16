@@ -29,7 +29,7 @@ interface IProps {
   total: number
   payload: IPayload
   visible: boolean
-  fetchArticle: (payload: IPayload) => void
+  fetchArticle: (payload: object) => void
   deleteArticle: (id: string) => void
   toggleVisible: (visible: boolean) => void
   editArticle: (payload: object) => void
@@ -71,7 +71,8 @@ class Articles extends React.Component<IProps> {
       payload,
       toggleVisible,
       visible,
-      editArticle
+      editArticle,
+      fetchArticle
     } = this.props
     const { pageIndex, pageSize } = payload
     const columns: Array<ColumnProps<IArticle>> = [
@@ -158,7 +159,7 @@ class Articles extends React.Component<IProps> {
           editArticle={editArticle}
         />
         <div className="search-form">
-          <SearchForm />
+          <SearchForm fetchArticle={fetchArticle} payload={payload} />
         </div>
         <Table
           scroll={{ x: 1000 }}

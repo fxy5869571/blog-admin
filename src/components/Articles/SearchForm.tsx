@@ -1,19 +1,23 @@
 import { Button, Form, Input, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import * as React from 'react'
+import { IPayload } from '../../actions/articles'
 const Option = Select.Option
 const FormItem = Form.Item
 interface IArticle extends FormComponentProps {
   title?: string
   abstract?: string
   type?: string
+  payload: object
+  fetchArticle: (payload: IPayload) => void
 }
-class Login extends React.Component<IArticle, any> {
+class Login extends React.Component<IArticle> {
   public handleSubmit = (e: any) => {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log(values)
+        this.props.fetchArticle({ ...this.props.payload, ...values })
       }
     })
   }
