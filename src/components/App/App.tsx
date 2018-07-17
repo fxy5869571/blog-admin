@@ -146,10 +146,12 @@ class App extends React.Component<IProps> {
               theme={theme}
             />
             <div className={theme ? 'switch-theme dark' : 'switch-theme light'}>
-              <span>
-                <Icon type="bulb" />
-                <span className="title">切换主题</span>
-              </span>
+              {!collapsed && (
+                <span>
+                  <Icon type="bulb" />
+                  <span className="title">切换主题</span>
+                </span>
+              )}
               <Switch
                 checkedChildren="dark"
                 unCheckedChildren="light"
@@ -182,7 +184,7 @@ class App extends React.Component<IProps> {
           <Content
             className="content"
             style={{
-              backgroundColor: (isTransparent || isIndex) ? 'transparent' : '#fff'
+              backgroundColor: isTransparent || isIndex ? 'transparent' : '#fff'
             }}>
             <div>{children}</div>
           </Content>

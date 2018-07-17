@@ -1,13 +1,19 @@
 import DataSet from '@antv/data-set'
-import { Card, Col, Icon, Row } from 'antd'
+import { BackTop, Card, Col, Icon, Row } from 'antd'
 import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts'
 import * as React from 'react'
+import LastArticle, { IArticle } from './LastArticle'
+import LastCollect from './LastCollect'
+import LastSay from './LastSay'
 import './styles.less'
 interface IInfo {
   access: number
   sayNumber: number
   articleNumber: number
   collectNumber: number
+  lastArticle: IArticle
+  lastCollect: object
+  lastSay: object
   data: object[]
 }
 interface IProps {
@@ -45,6 +51,9 @@ class IndexPage extends React.Component<IProps> {
       articleNumber,
       collectNumber,
       data = [],
+      lastArticle,
+      lastCollect,
+      lastSay,
       sayNumber
     } = this.props.info
     const list = [
@@ -78,6 +87,7 @@ class IndexPage extends React.Component<IProps> {
     })
     return (
       <div className="index-page">
+        <BackTop />
         <Row>
           {list.map((item, index) => (
             <Col
@@ -139,6 +149,32 @@ class IndexPage extends React.Component<IProps> {
             />
           </Chart>
         </Card>
+        <Row className="last">
+          <Col
+            xs={24}
+            sm={{ span: 24 }}
+            md={{ span: 12 }}
+            xl={{ span: 12 }}
+            xxl={{ span: 12 }}>
+            <LastArticle lastArticle={lastArticle} />
+          </Col>
+          <Col
+            xs={24}
+            sm={{ span: 12 }}
+            md={{ span: 12 }}
+            xl={{ span: 6 }}
+            xxl={{ span: 6 }}>
+            <LastCollect lastCollect={lastCollect} />
+          </Col>
+          <Col
+            xs={24}
+            sm={{ span: 12 }}
+            md={{ span: 12 }}
+            xl={{ span: 6 }}
+            xxl={{ span: 6 }}>
+            <LastSay lastSay={lastSay} />
+          </Col>
+        </Row>
       </div>
     )
   }
