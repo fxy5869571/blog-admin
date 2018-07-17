@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { RECEIVE_TOKEN } from '../actions/user'
 import App from '../components/App/App'
@@ -12,7 +12,7 @@ const mapStateToProps = ({ info, user }: IInfo) => {
   return { info, token: user.token }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch) => {
+export const mapDispatchToProps = (dispatch: any) => {
   return {
     isLogin: () => {
       const user = localStorage.getItem('user')

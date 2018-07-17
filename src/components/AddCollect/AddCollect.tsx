@@ -44,7 +44,7 @@ class AddCollect extends React.Component<IArticle> {
           <FormItem>
             {getFieldDecorator('content', {
               rules: [{ required: true, message: '收藏摘要!' }]
-            })(<Editor />)}
+            })(<Editor placeholder="填写个收藏地址吧" />)}
           </FormItem>
         </Form>
       </div>

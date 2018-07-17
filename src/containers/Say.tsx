@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { DELETE_SAY, REQUEST_SAY } from '../actions/say'
 import Say from '../components/Say/Say'
 
@@ -7,7 +7,7 @@ const mapStateToProps = ({ say }: any) => ({
   say: say.say,
   total: say.total || 0
 })
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   deleteSay: (id: string) => {
     dispatch({ type: DELETE_SAY, payload: { _id: id } })
   },

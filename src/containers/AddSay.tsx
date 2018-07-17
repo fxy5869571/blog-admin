@@ -1,8 +1,8 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { ADD_SAY } from '../actions/say'
 import AddSay from '../components/AddSay/AddSay'
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   addSay: (payload: object) => {
     dispatch({ type: ADD_SAY, payload })
   }

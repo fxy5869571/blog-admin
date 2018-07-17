@@ -71,7 +71,7 @@ const RouterMap = (props: any) => {
             exact={true}
             path="/"
             component={Loadable({
-              loader: () => import('../components/index/Index'),
+              loader: () => import('../containers/Index'),
               loading
             })}
           />

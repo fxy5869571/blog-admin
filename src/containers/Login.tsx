@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { REQUEST_TOKEN } from '../actions/user'
 import Login from '../components/Login/Login'
 
@@ -14,7 +14,7 @@ const mapStateToProps = ({ user }: IState) => {
   const { loading, token } = user
   return { loading, token }
 }
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   login: (payload: object) => {
     dispatch({ type: REQUEST_TOKEN, payload })
   }

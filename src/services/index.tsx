@@ -19,12 +19,11 @@ const getSay = (payLoad: object) => blogFetch('/get-say', payLoad)
 const blogPost = (url: string, payload: object) =>
   blogFetch(url, payload, 'POST')
 
-const fetchInfo = () => blogFetch('/get-info')
+const fetchInfo = () => blogFetch('/get-admin-info')
 
 const fetchCollect = (payload: object) => blogFetch('/get-collect', payload)
 
 const login = (payload: object) => blogFetch('/login', payload, 'POST')
-
 
 export {
   blogPost,

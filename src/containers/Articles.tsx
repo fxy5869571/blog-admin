@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import {
   DELETE_ARTICLE,
   EDIT_ARTICLE,
@@ -24,7 +24,7 @@ const mapStateToProps = ({ articles, visible }: IState): object => ({
   visible
 })
 
-export const mapDispatchToProps = (dispatch: Dispatch) => ({
+export const mapDispatchToProps = (dispatch: any) => ({
   deleteArticle: (id: string) => {
     dispatch({ id, type: DELETE_ARTICLE })
   },

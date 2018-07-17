@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { ADD_ARTICLE } from '../actions/articles'
 import AddArticle from '../components/AddArticle/AddArticle'
 interface IState {
@@ -13,7 +13,7 @@ const mapStateToProps = (state: IState): object => ({
   total: state.articles.total
 })
 
-export const mapDispatchToProps = (dispatch: Dispatch) => ({
+export const mapDispatchToProps = (dispatch: any) => ({
   addArticle: (payload: object) => {
     dispatch({
       payload,

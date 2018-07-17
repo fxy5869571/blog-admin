@@ -123,6 +123,7 @@ class App extends React.Component<IProps> {
     const { collapsed, tagList, isMobile, theme } = this.state
     const isLogin = location.pathname === '/login'
     const isTransparent = location.pathname === '/edit-collect'
+    const isIndex = location.pathname === '/'
     return !isLogin ? (
       <Layout className="menu" style={{ height: '100vh' }}>
         {!isMobile && (
@@ -180,7 +181,9 @@ class App extends React.Component<IProps> {
           />
           <Content
             className="content"
-            style={{ backgroundColor: isTransparent ? 'transparent' : '#fff' }}>
+            style={{
+              backgroundColor: (isTransparent || isIndex) ? 'transparent' : '#fff'
+            }}>
             <div>{children}</div>
           </Content>
         </Layout>

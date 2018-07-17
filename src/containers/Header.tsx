@@ -1,4 +1,4 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { CLEAR_TOKEN } from '../actions/user'
 import Header from '../components/Layout/Header/Header'
 
@@ -12,7 +12,7 @@ interface IState {
 const mapStateToProps = ({ user }: IState) => {
   return { userName: user.userName }
 }
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   logout: () => {
     dispatch({ type: CLEAR_TOKEN })
   }
