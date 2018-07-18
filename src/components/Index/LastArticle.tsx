@@ -16,19 +16,23 @@ interface IProps {
   lastArticle: IArticle
 }
 const LastArticle = ({ lastArticle = {} }: IProps) => {
-  console.log(lastArticle)
   const { abstract, title, tag, access, create_at } = lastArticle
   return (
     <div className="last-card">
       {lastArticle && (
-        <Card title="最新文章" bordered={false}>
-          <p>{title}</p>
-          <p className="tag">
-            <span>发表于：{create_at && format(create_at)}</span>
-            <span>标签：{tag && tag.title}</span>
-            <span>浏览：{access}</span>
-          </p>
-          <div className="abstract">{abstract}...</div>
+        <Card bordered={false} hoverable={true}>
+          <div className="last-item">
+            <div className="avatar avatar-two">W</div>
+            <div className="last-right">
+              <h5>{title}</h5>
+              <p className="tag">
+                <span>发表于：{create_at && format(create_at)}</span>
+                <span>标签：{tag && tag.title}</span>
+                <span>浏览：{access}</span>
+              </p>
+              <div className="abstract last-content">{abstract}...</div>
+            </div>
+          </div>
         </Card>
       )}
     </div>

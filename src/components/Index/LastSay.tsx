@@ -9,13 +9,21 @@ interface IProps {
   lastSay: ILastSay
 }
 const LastSay = ({ lastSay = {} }: IProps) => {
-  console.log(lastSay)
   const { create_at, say } = lastSay
+  const replaceHtml = /<(?:.|\s)*?>/g
   return (
     <div className="last-card">
-      <Card title="最新说说" bordered={false}>
-        {say && <div dangerouslySetInnerHTML={{ __html: say }} />}
-        {create_at && <p>发表于：{format(create_at)}</p>}
+      <Card bordered={false} hoverable={true}>
+        <div className="last-item">
+          <div className="avatar avatar-three">S</div>
+          <div className="last-right">
+            <h5>最新说说</h5>
+            {create_at && <p className="tag">发表于：{format(create_at)}</p>}
+            <div className="last-content">
+              {say && say.replace(replaceHtml, '')}
+            </div>
+          </div>
+        </div>
       </Card>
     </div>
   )

@@ -11,15 +11,24 @@ interface IProps {
   lastCollect: ILastCollect
 }
 const LastSay = ({ lastCollect = {} }: IProps) => {
-  console.log(lastCollect)
   const { create_at, content, tag, title } = lastCollect
+  const replaceHtml = /<(?:.|\s)*?>/g
   return (
     <div className="last-card">
-      <Card title="最新收藏" bordered={false}>
-        <p>{title}</p>
-        <span>{tag}</span>
-        {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
-        {create_at && <p>发表于：{format(create_at)}</p>}
+      <Card bordered={false} hoverable={true}>
+        <div className="last-item">
+          <div className="avatar avatar-one">C</div>
+          <div className="last-right">
+            <h5>{title}</h5>
+            <p className="tag">
+              {create_at && <span>发表于：{format(create_at)}</span>}
+              <span>标签：{tag}</span>
+            </p>
+            <div className="last-content">
+              {content && content.replace(replaceHtml, '')}
+            </div>
+          </div>
+        </div>
       </Card>
     </div>
   )

@@ -1,12 +1,52 @@
 .index-page {
+  .last-right {
+    width: calc(100% - 20px);
+  }
+  .last-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  h5 {
+    font-size: 15px;
+    color: #474747;
+    text-align: left;
+    font-weight: bold;
+  }
+  .last-item {
+    display: flex;
+    justify-content: flex-start;
+    height: 100px;
+  }
+  .avatar {
+    font-size: 20px;
+    color: #7f7584;
+    min-width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .avatar-one {
+    background-color: #79f2ab;
+  }
+  .avatar-two {
+    background-color: #d078f2;
+  }
+  .avatar-three {
+    background-color: #f0f279;
+  }
   .last {
-    margin-top: 20px;
     .last-card {
       margin-right: 20px;
-      height: 220px;
+      height: 180px;
     }
   }
   .tag {
+    display: flex;
+    justify-content: flex-start;
     color: #999;
     > span {
       margin-right: 10px;
@@ -15,6 +55,7 @@
   }
   .card {
     margin-right: 20px;
+    margin-bottom: 20px;
   }
   .card-item {
     display: flex;
@@ -25,14 +66,6 @@
     }
     .card-right {
       margin-left: 20px;
-    }
-    .title {
-      color: #666;
-      font-size: 16px;
-      margin-bottom: 8px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
     }
     .number {
       color: #666;
@@ -46,7 +79,16 @@
     }
   }
   .card-chart {
-    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: 20px;
+    .title {
+      text-align: center;
+    }
   }
+}
+.test {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(50%, 50%);
 }
