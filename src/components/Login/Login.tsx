@@ -20,7 +20,7 @@ class Login extends React.Component<IProps, any> {
   public static getDerivedStateFromProps(props: IProps) {
     const { history, token } = props
     if (token) {
-      history.push('/')
+      history.push('/admin')
     }
     return null
   }

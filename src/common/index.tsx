@@ -40,10 +40,9 @@ const blogFetch = (
   } else {
     let token = ''
     const user = localStorage.getItem('user')
-    if (user) {
+    if (user && user !== 'undefined') {
       token = JSON.parse(user).token
     }
-    console.log(token)
     initObj = {
       body: JSON.stringify(data),
       headers: new Headers({

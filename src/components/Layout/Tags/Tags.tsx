@@ -15,7 +15,7 @@ class Tags extends React.Component<IProps> {
       <div className="tags">
         {tagList.map(
           item =>
-            item.url === '/' ? (
+            item.url === '/admin' ? (
               <Link to={item.url || ''} key={item.key}>
                 <Tag color={item.url === pathname ? '#1890ff' : 'blue'}>
                   <Icon type={item.icon} className="big-icon-font right" />

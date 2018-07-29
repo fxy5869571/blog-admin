@@ -16,7 +16,7 @@ export const mapDispatchToProps = (dispatch: any) => {
   return {
     isLogin: () => {
       const user = localStorage.getItem('user')
-      if (user) {
+      if (user && user !== 'undefined') {
         dispatch({ type: RECEIVE_TOKEN, user: JSON.parse(user) })
       }
     }

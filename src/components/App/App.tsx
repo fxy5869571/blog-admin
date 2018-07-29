@@ -5,7 +5,6 @@ import Header from '../../containers/Header'
 import Menu, { IMenuItem } from '../Layout/Menu/Menu'
 import Tags from '../Layout/Tags/Tags'
 import './style.less'
-
 const { Sider, Content } = Layout
 export interface IHistory {
   push: (pathname: string) => void
@@ -20,7 +19,6 @@ interface IProps {
   isLogin: () => void
   token: string
 }
-
 class App extends React.Component<IProps> {
   public timer: any
   public menuList = [
@@ -80,19 +78,30 @@ class App extends React.Component<IProps> {
     theme: true
   }
   public componentDidMount() {
+    this.isLogin()
     this.props.isLogin()
     this.onResize()
     this.setState({
       tagList: JSON.parse(localStorage.getItem('tagList') || '[]')
     })
   }
+  public isLogin = () => {
+    const user = localStorage.getItem('user')
+    if (user && user !== 'undefined') {
+      this.props.history.push('/admin')
+    } else {
+      this.props.history.push('/admin/login')
+    }
+  }
   public onClose = (tag: IMenuItem) => {
     this.setState(
       { tagList: this.state.tagList.filter(item => item.key !== tag.key) },
       () => {
-        const { url } = this.state.tagList[this.state.tagList.length - 1]
-        this.props.history.push(url)
-        this.setLocalStorage()
+        if (this.state.tagList.length > 0) {
+          const { url } = this.state.tagList[this.state.tagList.length - 1]
+          this.props.history.push(url)
+          this.setLocalStorage()
+        }
       }
     )
   }

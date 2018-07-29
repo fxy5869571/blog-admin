@@ -1,12 +1,6 @@
 import * as React from 'react'
 import * as Loadable from 'react-loadable'
-import { connect } from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import App from '../containers/App'
 import '../index.less'
 import loading from './loading'
@@ -38,43 +32,17 @@ const RouterList: any[] = [
   {
     component: () => import('../containers/Login'),
     path: '/admin/login'
+  },
+  {
+    component: () => import('../containers/Index'),
+    path: '/admin'
   }
 ]
-const PrivateRoute = ({ component: Component, token, ...rest }: any) => {
-  let isLogin = token
-  const user = localStorage.getItem('user')
-  if (user) {
-    isLogin = JSON.parse(user).token
-  }
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        !isLogin ? (
-          <Redirect to={{ pathname: '/admin/login' }} />
-        ) : (
-          <Component {...props} />
-        )
-      }
-    />
-  )
-}
-
-const RouterMap = (props: any) => {
+const RouterMap = () => {
   return (
     <Router>
       <App>
         <Switch>
-          <PrivateRoute
-            token={props.token}
-            key="/"
-            exact={true}
-            path="/admin"
-            component={Loadable({
-              loader: () => import('../containers/Index'),
-              loading
-            })}
-          />
           {RouterList.map(item => (
             <Route
               key={item.path}
@@ -92,5 +60,4 @@ const RouterMap = (props: any) => {
   )
 }
 
-const mapStateToProps = (state: any): object => ({ token: state.user.token })
-export default connect(mapStateToProps)(RouterMap)
+export default RouterMap

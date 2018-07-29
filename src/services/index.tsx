@@ -1,4 +1,3 @@
-import 'whatwg-fetch'
 import { IPayload } from '../actions/articles'
 import { blogFetch } from '../common'
 // article
@@ -23,7 +22,9 @@ const fetchInfo = () => blogFetch('/get-admin-info')
 
 const fetchCollect = (payload: object) => blogFetch('/get-collect', payload)
 
-const login = (payload: object) => blogFetch('/login', payload, 'POST')
+const login = (payload: object) => {
+  return blogFetch('/login', payload, 'POST')
+}
 
 export {
   blogPost,
