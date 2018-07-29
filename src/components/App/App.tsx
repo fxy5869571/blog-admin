@@ -24,11 +24,21 @@ interface IProps {
 class App extends React.Component<IProps> {
   public timer: any
   public menuList = [
-    { label: '首页', url: '/', icon: 'home', key: '1' },
+    { label: '首页', url: '/admin', icon: 'home', key: '1' },
     {
       children: [
-        { label: '文章管理', url: '/edit-article', icon: 'form', key: '2' },
-        { label: '发表文章', url: '/add-article', icon: 'upload', key: '3' }
+        {
+          icon: 'form',
+          key: '2',
+          label: '文章管理',
+          url: '/admin/edit-article'
+        },
+        {
+          icon: 'upload',
+          key: '3',
+          label: '发表文章',
+          url: '/admin/add-article'
+        }
       ],
       icon: 'book',
       key: '7',
@@ -36,8 +46,8 @@ class App extends React.Component<IProps> {
     },
     {
       children: [
-        { label: '说说管理', url: '/edit-say', icon: 'form', key: '5' },
-        { label: '发表说说', url: '/add-say', icon: 'upload', key: '6' }
+        { label: '说说管理', url: '/admin/edit-say', icon: 'form', key: '5' },
+        { label: '发表说说', url: '/admin/add-say', icon: 'upload', key: '6' }
       ],
       icon: 'message',
       key: '8',
@@ -45,30 +55,28 @@ class App extends React.Component<IProps> {
     },
     {
       children: [
-        { label: '收藏管理', url: '/edit-collect', icon: 'form', key: '13' },
-        { label: '添加收藏', url: '/add-collect', icon: 'upload', key: '12' }
+        {
+          icon: 'form',
+          key: '13',
+          label: '收藏管理',
+          url: '/admin/edit-collect'
+        },
+        {
+          icon: 'upload',
+          key: '12',
+          label: '添加收藏',
+          url: '/admin/add-collect'
+        }
       ],
       icon: 'file-add',
       key: '11',
       label: '收藏'
-    },
-    {
-      icon: 'exception',
-      key: '9',
-      label: '简历',
-      url: '/resume'
-    },
-    {
-      icon: 'user',
-      key: '10',
-      label: '用户',
-      url: '/user'
     }
   ]
   public state = {
     collapsed: false,
     isMobile: false,
-    tagList: [{ label: '首页', url: '/', icon: 'home', key: '1' }],
+    tagList: [{ label: '首页', url: '/admin', icon: 'home', key: '1' }],
     theme: true
   }
   public componentDidMount() {
@@ -121,9 +129,9 @@ class App extends React.Component<IProps> {
   public render() {
     const { children, location } = this.props
     const { collapsed, tagList, isMobile, theme } = this.state
-    const isLogin = location.pathname === '/login'
-    const isTransparent = location.pathname === '/edit-collect'
-    const isIndex = location.pathname === '/'
+    const isLogin = location.pathname === '/admin/login'
+    const isTransparent = location.pathname === '/admin/edit-collect'
+    const isIndex = location.pathname === '/admin'
     return !isLogin ? (
       <Layout className="menu" style={{ height: '100vh' }}>
         {!isMobile && (

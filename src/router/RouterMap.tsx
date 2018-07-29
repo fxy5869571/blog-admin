@@ -13,31 +13,31 @@ import loading from './loading'
 const RouterList: any[] = [
   {
     component: () => import('../containers/Articles'),
-    path: '/edit-article'
+    path: '/admin/edit-article'
   },
   {
     component: () => import('../containers/Say'),
-    path: '/edit-say'
+    path: '/admin/edit-say'
   },
   {
     component: () => import('../containers/AddSay'),
-    path: '/add-say'
+    path: '/admin/add-say'
   },
   {
     component: () => import('../containers/AddArticle'),
-    path: '/add-article'
+    path: '/admin/add-article'
   },
   {
     component: () => import('../containers/Collect'),
-    path: '/edit-collect'
+    path: '/admin/edit-collect'
   },
   {
     component: () => import('../containers/AddCollect'),
-    path: '/add-collect'
+    path: '/admin/add-collect'
   },
   {
     component: () => import('../containers/Login'),
-    path: '/login'
+    path: '/admin/login'
   }
 ]
 const PrivateRoute = ({ component: Component, token, ...rest }: any) => {
@@ -51,7 +51,7 @@ const PrivateRoute = ({ component: Component, token, ...rest }: any) => {
       {...rest}
       render={props =>
         !isLogin ? (
-          <Redirect to={{ pathname: '/login' }} />
+          <Redirect to={{ pathname: '/admin/login' }} />
         ) : (
           <Component {...props} />
         )
@@ -69,7 +69,7 @@ const RouterMap = (props: any) => {
             token={props.token}
             key="/"
             exact={true}
-            path="/"
+            path="/admin"
             component={Loadable({
               loader: () => import('../containers/Index'),
               loading
