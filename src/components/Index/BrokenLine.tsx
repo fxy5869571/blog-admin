@@ -42,6 +42,7 @@ const BrokeLine = ({ data }: IProps) => {
       <p className="title">博客各月份更新数据统计</p>
       <Chart
         height={350}
+        style={{ maxWidth: 750 }}
         data={dv}
         forceFit={true}
         onTooltipChange={onTooltipChange}>

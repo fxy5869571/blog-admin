@@ -6,10 +6,14 @@ interface IProps {
 }
 const Bar = ({ accessData = [] }: IProps) => {
   return (
-    <div className="card-chart" >
+    <div className="card-chart">
       <Card hoverable={true} bordered={false}>
         <p className="title">博客各月份访问人数统计</p>
-        <Chart height={350} data={accessData} forceFit={true}>
+        <Chart
+          height={350}
+          data={accessData}
+          forceFit={true}
+          style={{ maxWidth: 750 }}>
           <Axis name="month" />
           <Axis name="value" />
           <Tooltip />

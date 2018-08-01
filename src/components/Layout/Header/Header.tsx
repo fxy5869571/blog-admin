@@ -13,7 +13,7 @@ interface IProps extends IHistory {
 class BlogHeader extends React.Component<IProps> {
   public onClick = () => {
     this.props.logout()
-    this.props.push('/login')
+    this.props.push('/admin/login')
   }
   public render() {
     const { collapsed, toggle, children, isMobile, userName } = this.props

@@ -1,6 +1,7 @@
 import { message } from 'antd'
 import 'whatwg-fetch'
-const api = 'http://localhost:8001/api'
+// const api = 'http://localhost:8001/api'
+const api = 'http://132.232.34.190/api'
 const dataToString = (data: object) => {
   const array: any = []
   let index = 0

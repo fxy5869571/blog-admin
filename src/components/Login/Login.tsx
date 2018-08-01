@@ -34,6 +34,17 @@ class Login extends React.Component<IProps, any> {
       }
     })
   }
+  public isLogin = () => {
+    const user = localStorage.getItem('user')
+    if (user && user !== 'undefined') {
+      this.props.history.push('/admin')
+    } else {
+      // this.props.history.push('/admin/login')
+    }
+  }
+  public componentDidMount() {
+    this.isLogin()
+  }
   public render() {
     const { loading } = this.props
     const { getFieldDecorator } = this.props.form

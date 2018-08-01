@@ -88,7 +88,7 @@ class App extends React.Component<IProps> {
   public isLogin = () => {
     const user = localStorage.getItem('user')
     if (user && user !== 'undefined') {
-      this.props.history.push('/admin')
+      // this.props.history.push('/admin')
     } else {
       this.props.history.push('/admin/login')
     }
