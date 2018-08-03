@@ -2,7 +2,7 @@
 ```
 git clone https://github.com/fxy5869571/blog-admin
 
-cd blog-
+cd blog-admin
 
 yarn install
 
