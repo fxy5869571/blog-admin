@@ -3,7 +3,7 @@ import * as React from 'react'
 import { format } from '../../common'
 import './style.less'
 const confirm = Modal.confirm
-interface ICollect {
+export interface ICollect {
   content: string
   _id: string
   create_at: string

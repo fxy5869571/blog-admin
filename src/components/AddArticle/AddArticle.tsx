@@ -4,7 +4,7 @@ import * as React from 'react'
 import Editor from '../common/Editor/Editor'
 const Option = Select.Option
 const FormItem = Form.Item
-interface IArticle extends FormComponentProps {
+export interface IArticle extends FormComponentProps {
   title: string
   abstract: string
   tag: string

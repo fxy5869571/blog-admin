@@ -4,12 +4,11 @@ import { RECEIVE_TOKEN } from '../actions/user'
 import App from '../components/App/App'
 
 interface IInfo {
-  info: object
   user: any
 }
 
-const mapStateToProps = ({ info, user }: IInfo) => {
-  return { info, token: user.token }
+const mapStateToProps = ({ user }: IInfo) => {
+  return { token: user.token }
 }
 
 export const mapDispatchToProps = (dispatch: any) => {

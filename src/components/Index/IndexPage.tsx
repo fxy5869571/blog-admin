@@ -7,7 +7,7 @@ import LastArticle, { IArticle } from './LastArticle'
 import LastCollect from './LastCollect'
 import LastSay from './LastSay'
 import './styles.less'
-interface IInfo {
+export interface IInfo {
   access: number
   accessData: object[]
   sayNumber: number

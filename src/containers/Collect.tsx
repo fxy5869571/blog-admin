@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
 import { DELETE_COLLECT, REQUEST_COLLECT } from '../actions/collect'
-import Collect from '../components/Collect/Collect'
-interface ICollect {
-  collect: object[]
-  payload: object
+import { IPayload } from '../actions/collect'
+import Collect, { ICollect } from '../components/Collect/Collect'
+
+interface ICollects {
+  collect: ICollect[]
+  payload: IPayload
   total: number
 }
 interface IState {
-  collect: ICollect
+  collect: ICollects
 }
 const mapStateToProps = ({ collect }: IState) => ({
   collect: collect.collect,
