@@ -6,14 +6,14 @@ import {
   REQUEST_ARTICLES,
   VISIBLE_ARTICLE
 } from '../actions/articles'
-import Articles from '../components/Articles/Articles'
+import Articles, { IArticle } from '../components/Articles/Articles'
 
 interface IState {
   articles: IArticles
   visible: boolean
 }
 interface IArticles {
-  articles: object[]
+  articles: IArticle[]
   total: number
   payload: IPayload
 }

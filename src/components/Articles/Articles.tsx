@@ -10,7 +10,7 @@ interface ITag {
   title: string
   color: string
 }
-interface IArticle {
+export interface IArticle {
   _id: string
   content: string
   title: string
